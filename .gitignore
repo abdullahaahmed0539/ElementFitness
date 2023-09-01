@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+###
+ElementFitness.App/appsettings.json
+ElementFitness.App/appsettings.Development.json
