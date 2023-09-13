@@ -365,3 +365,4 @@ FodyWeavers.xsd
 ###
 ElementFitness.App/appsettings.json
 ElementFitness.App/appsettings.Development.json
+ElementFitness.App/Migrations

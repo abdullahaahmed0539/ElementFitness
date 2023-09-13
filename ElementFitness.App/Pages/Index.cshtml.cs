@@ -14,7 +14,6 @@ namespace ElementFitness.App.Pages
 
         public void OnGet()
         {
-
         }
     }
 }
