@@ -17,8 +17,18 @@ namespace ElementFitness.Utils.Configurations
             get
             {
                 if (Configuration["ConnectionStrings:PostgresConnectionString"] == null || string.IsNullOrWhiteSpace(Configuration["ConnectionStrings:PostgresConnectionString"]))
-                    throw new Exception("Postgres Connection String is not valid in AppSettings file");
+                    throw new Exception("Postgres Connection String is not valid in AppSettings file.");
                 return Configuration["ConnectionStrings:PostgresConnectionString"];
+            }
+        }
+
+        public static string SerilogOutputFilePath
+        {
+            get
+            {
+                if (Configuration["Serilog:outputFilePath"] == null || string.IsNullOrWhiteSpace(Configuration["Serilog:outputFilePath"]))
+                    throw new Exception("There is no output file path defined for Serilog.");
+                return Configuration["Serilog:outputFilePath"];
             }
         }
 

@@ -2,6 +2,7 @@ using ElementFitness.DAL.Data;
 using ElementFitness.Utils.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseNpgsql(AppSettings.PostGresConnectionString, b => b.MigrationsAssembly("ElementFitness.App"));
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-
+builder.Host.UseSerilog();
 IConfiguration configuration = builder.Configuration;
 AppSettings.IntializeConfiguration(configuration);
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File(AppSettings.SerilogOutputFilePath, rollingInterval: RollingInterval.Infinite)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
@@ -25,16 +34,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapRazorPages();
-
-
-
 app.Run();

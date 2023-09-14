@@ -8,6 +8,10 @@ html {
   }
 }
 
+.bebas {
+  font-family: "Bebas Neue", sans-serif;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -15,4 +19,27 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #e51440;
+  border-color: #e00e3b;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #b7072d;
+  border-color: #b7072d;
+  outline: none !important;
+  box-shadow: none;
+}
+
+.btn:focus,
+.btn:active {
+  color: #fff;
+  background-color: #e51440;
+  border-color: #e00e3b;
+  outline: none !important;
+  box-shadow: none;
 }
