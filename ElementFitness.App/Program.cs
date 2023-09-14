@@ -1,3 +1,4 @@
+using ElementFitness.App;
 using ElementFitness.DAL.Data;
 using ElementFitness.Utils.Configurations;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +26,8 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 var app = builder.Build();
+await InitialSetup.BuildDefaultIdentityAsync(app.Services.CreateScope().ServiceProvider);
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

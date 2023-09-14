@@ -1,12 +1,16 @@
 using ElementFitness.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace ElementFitness.DAL.Data {
     public class ApplicationDbContext: IdentityDbContext {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){
+
+        private readonly IServiceProvider _serviceProvider;
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IServiceProvider serviceProvider): base(options)
+        {
+            _serviceProvider = serviceProvider;
         }
 
         public DbSet<Contact>? Contacts  { get; set; }
@@ -20,38 +24,7 @@ namespace ElementFitness.DAL.Data {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            BuildIdentity(modelBuilder);
             BuildDatabase(modelBuilder);
-        }
-        private void BuildIdentity(ModelBuilder modelBuilder){
-
-            string roleID = Guid.NewGuid().ToString(), userID = Guid.NewGuid().ToString();
-
-            //Seeding a  'Administrator' role to AspNetRoles table
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = roleID, Name = "Administrator", NormalizedName = "ADMINISTRATOR".ToUpper() });
-
-            //a hasher to hash the password before seeding the user to the db
-            var hasher = new PasswordHasher<IdentityUser>();
-
-            //Seeding the User to AspNetUsers table
-            modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser
-                {
-                    Id = userID,
-                    UserName = "Admin",
-                    NormalizedUserName = "Admin",
-                    PasswordHash = hasher.HashPassword(null, "AdminPassword")
-                }
-            );
-
-            //Seeding the relation between our user and role to AspNetUserRoles table
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>
-                {
-                    RoleId = roleID, 
-                    UserId = userID
-                }
-            );
         }
 
         private void BuildDatabase(ModelBuilder modelBuilder){

@@ -32,6 +32,16 @@ namespace ElementFitness.Utils.Configurations
             }
         }
 
+        public static string AdminPassword
+        {
+            get
+            {
+                if (Configuration["AdminPassword"] == null || string.IsNullOrWhiteSpace(Configuration["AdminPassword"]))
+                    throw new Exception("There is no admin password defined.");
+                return Configuration["AdminPassword"];
+            }
+        }
+
     }
 }
 
