@@ -1,0 +1,37 @@
+﻿@page
+@using ElementFitness.App.ViewModels;
+@model AdminLoginModel
+@{
+    ViewData["Title"] = "Admin Portal Login";
+    Layout = "_BasicLayout";
+}
+
+<div class="row" >
+    <div class="dialog col-10 col-sm-9 col-md-5">
+        <h1 class="bebas-light text-center col-12">Admin Portal <br> Login</h1>
+        <div class="row justify-content-md-center">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="Credential.Username" class="bebas-light"></label>
+                        <input asp-for="Credential.Username" class="form-control" />
+                        <span asp-validation-for="Credential.Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-4">
+                        <label asp-for="Credential.Password" class="bebas-light"></label>
+                        <input asp-for="Credential.Password" class="form-control" />
+                        <span asp-validation-for="Credential.Password" class="text-danger"></span>
+                    </div>
+                    @if(Model.DisplayErrorMessage)
+                    {
+                        <div asp-validation-summary="All" style="padding-top: 20px" class="text-danger"></div>
+                        <button type="submit" class="btn btn-primary mt-2 col-12">Login</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary mt-5 col-12">Login</button>
+                    }
+
+                </form>
+        </div>
+    </div>
+</div>

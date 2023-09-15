@@ -1,35 +1,44 @@
 using ElementFitness.Utils.Configurations;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 namespace ElementFitness.App{
 
     public class InitialSetup{
         public static async Task BuildDefaultIdentityAsync(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-            var roleExists = await roleManager.RoleExistsAsync("administrator");
-            if (!roleExists)
+            try
             {
-                await roleManager.CreateAsync(new IdentityRole("administrator"));
-            }
+                var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            IdentityUser userExists = await userManager.FindByNameAsync("admin");
-            if (userExists == null)
-            {
-                IdentityUser newUser = new()
+                bool roleExists = await roleManager.RoleExistsAsync("administrator");
+                if (!roleExists)
                 {
-                    UserName = "admin",
-                    PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, AppSettings.AdminPassword)
-                };
-
-                IdentityResult result = await userManager.CreateAsync(newUser);
-
-                if (result.Succeeded)
-                {
-                    userManager.AddToRoleAsync(newUser, "administrator").Wait();
+                    await roleManager.CreateAsync(new IdentityRole("administrator"));
                 }
+
+                IdentityUser userExists = await userManager.FindByNameAsync("admin");
+                if (userExists == null)
+                {
+                    IdentityUser newUser = new()
+                    {
+                        UserName = "admin",
+                        PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, AppSettings.AdminPassword)
+                    };
+
+                    IdentityResult result = await userManager.CreateAsync(newUser);
+
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(newUser, "administrator").Wait();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex, $"Stopping Application. Could not Seed admin user");
+                throw new Exception(ex.Message);
             }
         }
 

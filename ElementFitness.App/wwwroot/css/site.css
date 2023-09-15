@@ -8,8 +8,18 @@ html {
   }
 }
 
-.bebas {
+.bebas-light {
   font-family: "Bebas Neue", sans-serif;
+  color: white;
+}
+
+.bebas-dark {
+  font-family: "Bebas Neue", sans-serif;
+  color: black;
+}
+
+.dark-theme{
+  background-color: black;
 }
 
 html {
