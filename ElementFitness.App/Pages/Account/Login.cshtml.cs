@@ -27,7 +27,7 @@ namespace ElementFitness.App.Pages
             try
             {
                 if(Convert.ToBoolean(User?.Identity?.IsAuthenticated))
-                    return RedirectToPage("../Admin/Home");
+                    return RedirectToPage("../Admin/PromoVideo");
                 
             }
             catch(Exception ex)
@@ -47,7 +47,7 @@ namespace ElementFitness.App.Pages
                     return Page();
                 
                 SignInResult signInResult = await _signInManager.PasswordSignInAsync(Credential!.Username, Credential!.Password, true, false);
-                return signInResult.Succeeded ? RedirectToPage("../Admin/Home"): throw new Exception("Incorrect Username or Password", new Exception("AuthenticationError"));
+                return signInResult.Succeeded ? RedirectToPage("../Admin/PromoVideo"): throw new Exception("Incorrect Username or Password", new Exception("AuthenticationError"));
             }
             catch(Exception ex)
             {

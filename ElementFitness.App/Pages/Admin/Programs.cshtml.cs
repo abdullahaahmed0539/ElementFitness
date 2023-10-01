@@ -9,9 +9,9 @@ using Serilog;
 namespace ElementFitness.App.Pages
 {
     [Authorize(Roles = "administrator")]
-    public class AdminHomeModel : PageModel
+    public class ProgramsAdminViewModel : PageModel
     {
-        public AdminHomeModel()
+        public ProgramsAdminViewModel()
         {
         }
 

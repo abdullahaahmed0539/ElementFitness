@@ -9,22 +9,12 @@ a.navbar-brand {
   font-size: 8vw !important;
   }
 
-a {
-  color: #0077cc;
-}
-
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
 
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #624747;
 }
 
 .box-shadow {
@@ -36,10 +26,4 @@ button.accept-policy {
   line-height: inherit;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
-}
+
