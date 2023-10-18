@@ -1,0 +1,66 @@
+input[type="file"]{
+    /* display: none */
+    color: white;
+}
+
+label{
+    display: block;
+    position: relative;
+    background-color: #e51440;
+    color: white;
+    text-align: center;
+    width: 10.75em;
+    padding: 10px 0;
+    border-radius: 0.31em;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+label:hover{
+    display: block;
+    position: relative;
+    background-color: #b7072d;
+    border-color: #b7072d;
+    color: white;
+    text-align: center;
+    width: 10.75em;
+    padding: 10px 0;
+    border-radius: 0.31em;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}
+
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    display: block;
+}
+
+.img-container .delete-icon {
+    position: absolute; 
+    color: white;
+    background-color: #e51440;
+    top:5px; 
+    right:15px; 
+}
+
+
+.img-container .delete-icon:hover {
+    position: absolute; 
+    color: white;
+    background-color:#b7072d;
+    cursor: pointer;
+    top:5px; 
+    right:15px; 
+}
+

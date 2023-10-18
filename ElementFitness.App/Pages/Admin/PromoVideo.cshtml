@@ -3,6 +3,92 @@
 @{
     ViewData["Title"] = "Admin Portal - Promo Video";
     Layout = "_AdminLayout";
+    string videoPath = "~/" + Model.VideoPath;
 }
 
-<h1 style="color: white;">Promo video page</h1>
+<div class="row">
+    <div class="mt-3 col-md-10">
+        <h1 class="bebas-light">Promo video</h1>
+    </div>    
+</div>
+    @if(Model.VideoExists)
+    {
+        <div class="row mt-1">
+            <div class="col-12">
+                <p class="normal-text">This is the current promo video on your home page.</p>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+             <video 
+                controls
+                class="col-12" 
+                id="VideoPlayer" 
+                src="@Url.Content(videoPath)"
+                height="550" 
+            />           
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <h4 class="bebas-light">Replace video</h4>
+                <p class="normal-text">Choose a file to replace the video:</p>
+            </div>
+        </div>
+        <div class="row ms-1">
+            <form class="col-12" method="post" enctype="multipart/form-data">
+                <input 
+                    type="file" 
+                    class="row" 
+                    name="videoToBeReplaced" 
+                    id="replaceVideo" 
+                    title="Replace Video" 
+                    accept="video/mp4,video/mkv, video/x-m4v,video/*"
+                    />
+                <div class="row mt-4">
+                    <button id="disabled-upload-button" type="submit" class="btn btn-primary col-12 col-md-2" disabled>
+                        Replace video
+                    </button>
+                    <button id="upload-button" type="submit" class="btn btn-primary col-12 col-md-2" hidden> 
+                        Replace video
+                    </button>
+                </div>
+            </form>  
+        </div>   
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12">
+                <p class="normal-text mt-1">There is no video uploaded. your website is showing the default image .</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-2">
+                <form method="post" enctype="multipart/form-data">
+                    <input 
+                        type="file" 
+                        class="row" 
+                        name="videoToBeReplaced" 
+                        id="replaceVideo" 
+                        title="Replace Video" 
+                        accept="video/mp4,video/mkv, video/x-m4v,video/*"
+                        />
+                    <div class="row mt-4">
+                        <button id="disabled-upload-button" type="submit" class="btn btn-primary col-12 col-md-2" disabled>
+                            Upload video
+                        </button>
+                        <button id="upload-button" type="submit" class="btn btn-primary col-12 col-md-2" hidden> 
+                            Upload video
+                        </button>
+                    </div>
+                </form>  
+            </div>
+        </div>
+    }
+
+@section Scripts
+{
+    <script src="~/js/promoVideo.js" asp-append-version="true"></script> 
+}
+
+

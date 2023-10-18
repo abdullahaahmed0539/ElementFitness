@@ -36,7 +36,15 @@
     color: white;
 }
 
+#secondary-sidebar-toggle-button{
+    color: white;
+}
+
 #sidebar-toggle-button:hover{
+    cursor: pointer;
+}
+
+#sidebar-toggle-button-1:hover{
     cursor: pointer;
 }
 
@@ -51,18 +59,54 @@
 
     #side-nav.active{
         margin-left: 0px;
+        position: fixed
     }
+
+    #sidebar-toggle-button{
+        display: block;
+    }
+
+    #secondary-sidebar-toggle-button{
+        display: block;
+    }
+
 }
 
 @media(min-width: 768px){
-    #side-nav{
-        margin-left: -250px;
-        min-height: 100vh;
-        z-index: 1;
-  
-    }
-
     #side-nav.active{
         margin-left: 0px;
+        position: fixed;
+        min-height: 100vh;
+        z-index: 1;
     }
+
+    #side-nav{
+        margin-left: 0px;
+        min-height: 100vh;
+        position: fixed; 
+        z-index: 1;
+    } 
+
+    #sidebar-toggle-button{
+        display: none;
+    }
+
+    #secondary-sidebar-toggle-button{
+        display: none;
+    }
+
+    main{
+        margin-left: 250px;
+        width: auto;
+        position: relative;
+        overflow: auto;
+    }
+
+    .admin-body{
+        width: 80%;
+        position: relative;
+    }
+
+
+    
 }

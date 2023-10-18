@@ -52,8 +52,17 @@ $("#sidebar-toggle-button").on("click", () => {
         $(".sidebar").addClass("active"); 
         sidebarDisplaying = true;
     }
-    console.log(sidebarDisplaying);
+ });
 
+
+ $("#secondary-sidebar-toggle-button").on("click", () => {
+   if (sidebarDisplaying) {
+     $(".sidebar").removeClass("active");
+     sidebarDisplaying = false;
+   } else {
+     $(".sidebar").addClass("active");
+     sidebarDisplaying = true;
+   }
  });
 
 

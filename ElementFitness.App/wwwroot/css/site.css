@@ -13,10 +13,12 @@ html {
   color: white;
 }
 
-.bebas-dark {
-  font-family: "Bebas Neue", sans-serif;
-  color: black;
+
+.normal-text{
+  font-size: 16px;
+  color: white;
 }
+
 
 .dark-theme{
   background-color: black;
@@ -35,6 +37,8 @@ body {
   color: #fff;
   background-color: #e51440;
   border-color: #e00e3b;
+  font-family: "Bebas Neue", sans-serif;
+
 }
 
 .btn-primary:hover {
@@ -43,6 +47,7 @@ body {
   border-color: #b7072d;
   outline: none !important;
   box-shadow: none;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .btn:focus,
@@ -52,4 +57,42 @@ body {
   border-color: #e00e3b;
   outline: none !important;
   box-shadow: none;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.cancel-btn:focus,
+.cancel-btn:active {
+  color: #fff;
+  background-color: #4b4b4b;
+  border-color: #4b4b4b;
+  outline: none !important;
+  box-shadow: none;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.modal-content {
+  background-color:#2D2D2D;
+}
+
+.modal-title{
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+}
+.modal-body{
+  color: white;
+  padding-bottom: 10px;
+  padding-top: 5px;
+
+}
+
+.modal-header{
+  /* border-bottom: 0.5px solid #888888; */
+  border-bottom: none;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 10px;
+}
+
+.modal-footer{
+  border-top: none;
 }
