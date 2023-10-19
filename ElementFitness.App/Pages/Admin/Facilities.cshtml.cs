@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Image = System.IO.File ;
 using Serilog;
+using ElementFitness.Utils.Configurations;
+using ElementFitness.Utils.Exceptions;
+using System.Net;
 
 namespace ElementFitness.App.Pages
 {
@@ -27,7 +30,6 @@ namespace ElementFitness.App.Pages
         {
             try
             {
-
                 string directory = Path.Combine(WWWRoot, $"lib/facilities");
                 string[] files = Directory.GetFiles(directory);
                 PhotosPath = new string[files.Length];
@@ -57,23 +59,23 @@ namespace ElementFitness.App.Pages
             try
             {
                 if (imagesToBeUploaded == null)
-                    throw new Exception("No file chosen");                             
+                    throw new UploadException("No file chosen. Please choose image(s) for uploading");
 
                 string[] filenames = Randomizer.GenerateRandomNames(imagesToBeUploaded.Count);
                 string directory = Path.Combine(WWWRoot, $"lib/facilities");
 
-                if (Directory.GetFiles(directory).Length + imagesToBeUploaded.Count > 8)
-                    throw new Exception("Image count can not be greater than 8");
+                if (Directory.GetFiles(directory).Length + imagesToBeUploaded.Count > Convert.ToInt16(AppSettings.FacilitiesImagesLimit))
+                    throw new LimitException($"Upload limit has been reached. You can only upload {AppSettings.FacilitiesImagesLimit} images. Please delete some images to add new images.");
 
                 string[] imagePaths = new string[filenames.Length];
                 string fileExtension;
-                for(int i=0; i<filenames.Length; i++)
+                for (int i = 0; i < filenames.Length; i++)
                 {
                     fileExtension = Path.GetExtension(imagesToBeUploaded.ElementAt(i).FileName);
-                    imagePaths[i] =  Path.Combine(WWWRoot, $"lib/facilities/{filenames[i]}{fileExtension}");
+                    imagePaths[i] = Path.Combine(WWWRoot, $"lib/facilities/{filenames[i]}{fileExtension}");
                 }
 
-                for(int i = 0; i<imagePaths.Length; i++)
+                for (int i = 0; i < imagePaths.Length; i++)
                 {
                     using FileStream fileStream = new FileStream(imagePaths[i], FileMode.Create);
                     await imagesToBeUploaded.ElementAt(i).CopyToAsync(fileStream);
@@ -81,8 +83,15 @@ namespace ElementFitness.App.Pages
 
                 return OnGet();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                
+                if (ex is LimitException || ex is UploadException)
+                {
+                    ViewData["ErrorMessage"] = ex.Message;
+                    return OnGet();
+                }
+
                 Log.Error(ex.Message);
                 return RedirectToPage("../Error");
             }
@@ -94,7 +103,7 @@ namespace ElementFitness.App.Pages
             {
                 string directory = Path.Combine(WWWRoot, $"lib/facilities/{Path.GetFileName(imagePath)}");
                 Image.Delete(directory);
-                return OnGet();
+                return RedirectToPage("./Facilities");
             }
             catch(Exception ex)
             {

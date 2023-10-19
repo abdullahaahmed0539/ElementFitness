@@ -4,41 +4,17 @@ let sidebarDisplaying = true;
 
 $(document).ready(() => {
     const page = $(location).attr('href').replace(/\/\s*$/, "").split('/').pop();
-    switch(page){
-        case 'PromoVideo':
-            $("#PromoVideo").addClass('active');
-            break;
-        case 'Facilities':
-            $("#Facilities").addClass('active');
-            break;
-        case 'Programs':
-            $("#Programs").addClass('active');
-            break;
-        case 'Offers':
-            $("#Offers").addClass('active');
-            break;
-        case 'Trainers':
-            $("#Trainers").addClass('active');
-            break;
-        case 'Partners':
-            $("#Partners").addClass('active');
-            break;
-        case 'Enquiries':
-            $("#Enquiries").addClass('active');
-            break;
-        case 'JobListings':
-            $("#JobListings").addClass('active');
-            break;
-        case 'JobApplications':
-            $("#JobApplications").addClass('active');
-            break;
-        case 'Members&Leads':
-            $("#Members").addClass('active');
-            break;
-        default:
-            $("#PromoVideo").addClass('active');
-    }
-
+    if (page.startsWith("PromoVideo")) $("#PromoVideo").addClass("active");
+    else if (page.startsWith("Facilities")) $("#Facilities").addClass("active");
+    else if (page.startsWith("Programs")) $("#Programs").addClass("active");
+    else if (page.startsWith("Offers")) $("#Offers").addClass("active");
+    else if (page.startsWith("Trainers")) $("#Trainers").addClass("active");
+    else if (page.startsWith("Partners")) $("#Partners").addClass("active");
+    else if (page.startsWith("Enquiries")) $("#Enquiries").addClass("active");
+    else if (page.startsWith("JobListings")) $("#JobListings").addClass("active");
+    else if (page.startsWith("JobApplications")) $("#JobApplications").addClass("active");
+    else if (page.startsWith("Members&Leads")) $("#Members").addClass("active");
+    else $("#PromoVideo").addClass("active");
 })
 
 $("#sidebar-toggle-button").on("click", () => {

@@ -1,4 +1,5 @@
 ﻿using ElementFitness.Utils;
+using ElementFitness.Utils.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,7 +25,6 @@ namespace ElementFitness.App.Pages
         {
             try
             {
-
                 string directory = Path.Combine(WWWRoot, $"lib/promoVideo");
                 if(Directory.GetFiles(directory).Length > 0)
                 {
@@ -51,7 +51,7 @@ namespace ElementFitness.App.Pages
             try
             {
                 if (videoToBeReplaced == null)
-                    throw new Exception("No file chosen");
+                    throw new UploadException("No file chosen. Please choose an .mp4 file for uploading.");
 
                 string filename = Randomizer.GenerateRandomName();
                 string directory = Path.Combine(WWWRoot, $"lib/promoVideo");

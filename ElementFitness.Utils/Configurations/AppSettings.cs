@@ -42,6 +42,16 @@ namespace ElementFitness.Utils.Configurations
             }
         }
 
+        public static string FacilitiesImagesLimit
+        {
+            get
+            {
+                if (Configuration["FacilitiesImagesLimit"] == null || string.IsNullOrWhiteSpace(Configuration["FacilitiesImagesLimit"]))
+                    throw new Exception("There is no facilities images limit defined.");
+                return Configuration["FacilitiesImagesLimit"];
+            }
+        }
+
     }
 }
 
