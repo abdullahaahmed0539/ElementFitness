@@ -81,7 +81,7 @@ namespace ElementFitness.App.Pages
                     await imagesToBeUploaded.ElementAt(i).CopyToAsync(fileStream);
                 }
 
-                return OnGet();
+                return RedirectToPage("./Facilities");
             }
             catch (Exception ex)
             {
@@ -101,8 +101,8 @@ namespace ElementFitness.App.Pages
         {
             try
             {
-                string directory = Path.Combine(WWWRoot, $"lib/facilities/{Path.GetFileName(imagePath)}");
-                Image.Delete(directory);
+                string file = Path.Combine(WWWRoot, $"lib/facilities/{Path.GetFileName(imagePath)}");
+                Image.Delete(file);
                 return RedirectToPage("./Facilities");
             }
             catch(Exception ex)

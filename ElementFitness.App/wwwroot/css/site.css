@@ -60,6 +60,19 @@ body {
   font-family: "Bebas Neue", sans-serif;
 }
 
+.btn-outline-light:focus,
+.btn-outline-light:active {
+  background-color: black;
+  border-color: white;
+}
+
+.btn-outline-light:hover {
+  background-color: white;
+  border-color: black;
+  color: black;
+}
+
+
 .cancel-btn:focus,
 .cancel-btn:active {
   color: #fff;
@@ -95,4 +108,17 @@ body {
 
 .modal-footer{
   border-top: none;
+}
+
+.card
+{
+  background-color: black;
+}
+
+.card-title{
+  color: white;
+}
+
+.card-body{
+  padding-left: 0px;
 }

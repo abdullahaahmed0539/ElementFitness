@@ -1,0 +1,159 @@
+﻿@page "/Admin/Programs/{id:int}"
+@model ProgramDetailAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Programs";
+    Layout = "_AdminLayout";
+}
+
+<div class="row mt-4">
+    <div class="col-6">
+        <h1 class="bebas-light">@Model.Program.Name</h1>
+    </div>    
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 col-md-6">
+        <img src="@Url.Content(@Model.Program.ImageLink)" id="program-display" class="card-img-top" alt="@Model.Program.Name image" height="600">
+    </div>    
+    <div class="col-12 col-md-6 mt-4 mt-md-0">
+        @if (!string.IsNullOrWhiteSpace(Model.Program.Description))
+        {
+            <h3 class="bebas-light">Program Description</h3>
+            <p class="normal-text break-word">@Model.Program.Description</p>
+            <br>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.Program.DayAndTiming))
+        {
+            <h3 class="bebas-light">Day & Timing</h3>
+            <p class="normal-text">@Model.Program.DayAndTiming</p>
+            <br>
+        }
+
+        @if(!string.IsNullOrWhiteSpace(Model.Program.OtherDetails))
+        {
+            <h3 class="bebas-light">Other Details</h3>
+            <p class="normal-text break-word">@Model.Program.OtherDetails</p>
+            <br>
+        }
+        
+        @if (!string.IsNullOrWhiteSpace(Model.Program.Trainers))
+        {
+            <h3 class="bebas-light">Trainers</h3>
+            <p class="normal-text">@Model.Program.Trainers</p>
+            <br>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.Program.Charges))
+        {
+            <h3 class="bebas-light">Charges</h3>
+            <p class="normal-text">@Model.Program.Charges</p>
+            <br>
+        }
+
+        <div class="row">
+            <button class="btn btn-outline-light bebas-light col-4 col-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
+            <button class="btn btn-outline-light bebas-light col-4 col-lg-3" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+        </div>
+    </div>  
+</div>
+
+<!-- Delete Program Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Program</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the program?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteProgram" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="programId" class="btn btn-primary" value="@Model.Program.ProgramID">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Program Modal -->
+<div class="modal fade" id="update-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Update Program</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetFields('@Model.Program.Name', '@Model.Program.Description', '@Model.Program.DayAndTiming', '@Model.Program.OtherDetails', '@Model.Program.Trainers', '@Model.Program.Charges')"></button>
+      </div>
+        <form method="post" asp-page-handler="UpdateProgram" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="UpdatedProgram.Name" for="nameInput" class="bebas-light mt-3">Name</label>
+                    <input asp-for="UpdatedProgram.Name" type="text" class="form-control" id="nameInput" value="@Model.Program.Name">
+                    <small id="update-name-hint" class="form-text text-muted">@Model.Program.Name.Length/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedProgram.Description" for="descriptionInput" class="bebas-light mt-3">Description</label>
+                    <textarea name="@Html.NameFor(m => m.UpdatedProgram.Description)" type="text" class="form-control" id="descriptionInput" rows="4">@Model.Program.Description</textarea>
+                    <small id="update-description-hint" class="form-text text-muted">@Model.Program.Description.Length/250 characters</small>
+                </div> 
+                <div class="form-group">
+                    <label asp-for="UpdatedProgram.DayAndTiming" for="dayAndTimingInput" class="bebas-light mt-3">Day & Timing</label>
+                    <input asp-for="UpdatedProgram.DayAndTiming" type="text" class="form-control" id="dayAndTimingInput" value="@Model.Program.DayAndTiming">
+                    <small id="update-dnt-hint" class="form-text text-muted">@Model.Program.DayAndTiming.Length/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedProgram.OtherDetails" for="otherDetailsInput" class="bebas-light mt-3">Other Details</label>
+                    <textarea name="@Html.NameFor(m => m.UpdatedProgram.OtherDetails)" type="text" class="form-control" id="otherDetailsInput" rows="3">@Model.Program.OtherDetails</textarea>
+                    <small id="update-other-hint" class="form-text text-muted">@Model.Program.OtherDetails.Length/100 characters</small>
+
+                </div> 
+                <div class="form-group">
+                    <label asp-for="UpdatedProgram.Trainers" for="trainersInput" class="bebas-light mt-3">Trainers</label>
+                    <input asp-for="UpdatedProgram.Trainers" type="text" class="form-control" id="trainersInput" value="@Model.Program.Trainers">
+                    <small id="update-trainer-hint" class="form-text text-muted">@Model.Program.Trainers.Length/100 characters</small>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedProgram.Charges" for="chargesInput" class="bebas-light mt-3">Charges</label>
+                    <input asp-for="UpdatedProgram.Charges" type="text" class="form-control" id="chargesInput" value="@Model.Program.Charges"> 
+                    <small id="update-charges-hint" class="form-text text-muted">@Model.Program.Charges.Length/100 characters</small>
+                </div> 
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Display image</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="imgToBeUpdated" 
+                        id="imgToBeUpdated" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    id="update-modal-close-btn" 
+                    class="btn btn-secondary bebas-light cancel-btn" 
+                    data-bs-dismiss="modal" 
+                    onclick="resetFields('@Model.Program.Name', '@Model.Program.Description', '@Model.Program.DayAndTiming', '@Model.Program.OtherDetails', '@Model.Program.Trainers', '@Model.Program.Charges')">Cancel</button>
+                <button type="submit" id="update-modal-update-btn"  class="btn btn-primary">Update Program</button>   
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/programs.js" asp-append-version="true"></script> 
+}

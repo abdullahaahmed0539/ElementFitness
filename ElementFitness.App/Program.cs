@@ -1,11 +1,23 @@
 using ElementFitness.App;
+using ElementFitness.BL.Interfaces;
+using ElementFitness.BL.Services;
 using ElementFitness.DAL.Data;
+using ElementFitness.DAL.Interfaces;
+using ElementFitness.DAL.Repositories;
 using ElementFitness.Utils.Configurations;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Injecting Services & Repos
+builder.Services.AddScoped<IProgramService, ProgramService>();
+
+builder.Services.AddScoped<IProgramRepo, ProgramRepo>();
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -25,6 +37,11 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
+
+TypeAdapterConfig<ElementFitness.Models.Program, ElementFitness.Models.Program>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.ProgramID == 0, dest => dest.ProgramID)
+    .IgnoreNullValues(true);
 
 var app = builder.Build();
 await InitialSetup.BuildDefaultIdentityAsync(app.Services.CreateScope().ServiceProvider);

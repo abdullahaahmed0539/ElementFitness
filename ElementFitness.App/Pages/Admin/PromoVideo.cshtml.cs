@@ -68,6 +68,11 @@ namespace ElementFitness.App.Pages
                 }
                 return OnGet();
             }
+            catch(UploadException ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return OnGet();
+            }
             catch(Exception ex)
             {
                 Log.Error(ex.Message);

@@ -3,7 +3,10 @@ let sidebarDisplaying = true;
 
 
 $(document).ready(() => {
-    const page = $(location).attr('href').replace(/\/\s*$/, "").split('/').pop();
+  const splitURL = $(location).attr('href').replace(/\/\s*$/, "").split('/');
+  const page = splitURL[splitURL.indexOf("Admin") + 1];
+    
+    
     if (page.startsWith("PromoVideo")) $("#PromoVideo").addClass("active");
     else if (page.startsWith("Facilities")) $("#Facilities").addClass("active");
     else if (page.startsWith("Programs")) $("#Programs").addClass("active");
