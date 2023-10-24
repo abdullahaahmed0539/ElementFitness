@@ -15,8 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Injecting Services & Repos
 builder.Services.AddScoped<IProgramService, ProgramService>();
+builder.Services.AddScoped<IOfferService, OfferService>();
 
 builder.Services.AddScoped<IProgramRepo, ProgramRepo>();
+builder.Services.AddScoped<IOfferRepo, OfferRepo>();
 
 
 // Add services to the container.
@@ -41,6 +43,11 @@ builder.Host.UseSerilog();
 TypeAdapterConfig<ElementFitness.Models.Program, ElementFitness.Models.Program>
     .NewConfig()
     .IgnoreIf((src, dest) => src.ProgramID == 0, dest => dest.ProgramID)
+    .IgnoreNullValues(true);
+
+TypeAdapterConfig<ElementFitness.Models.Offer, ElementFitness.Models.Offer>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.OfferID == 0, dest => dest.OfferID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();

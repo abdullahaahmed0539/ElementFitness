@@ -1,5 +1,3 @@
-
-
 using ElementFitness.BL.Interfaces;
 using ElementFitness.DAL.Interfaces;
 using ElementFitness.Models;

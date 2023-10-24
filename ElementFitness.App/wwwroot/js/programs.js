@@ -31,7 +31,7 @@ $("#NameInput").on("keyup", () => {
 
 $("#DescriptionInput").on("keyup", () => {
   const descriptionInput = $("#DescriptionInput").val();
-  $("#add-description-hint").text(`${descriptionInput.length}/250 characters`);
+  $("#add-description-hint").text(`${descriptionInput.length}/400 characters`);
 });
 
 $("#DayAndTimingInput").on("keyup", () => {
@@ -63,7 +63,7 @@ $("#nameInput").on("keyup", () => {
 $("#descriptionInput").on("keyup", () => {
   const descriptionInput = $("#descriptionInput").val();
   $("#update-description-hint").text(
-    `${descriptionInput.length}/250 characters`
+    `${descriptionInput.length}/400 characters`
   );
 });
 
@@ -96,7 +96,7 @@ const resetAddModal = () => {
   $("#ChargesInput").val("");
   $("#DisplayImgInput").val(null);
   $("#add-name-hint").text(`0/50 characters`);
-  $("#add-description-hint").text(`0/250 characters`);
+  $("#add-description-hint").text(`0/400 characters`);
   $("#add-dnt-hint").text(`0/50 characters`);
   $("#add-other-hint").text(`0/100 characters`);
   $("#add-trainer-hint").text(`0/100 characters`);
@@ -112,7 +112,7 @@ const resetFields = (name, description, dayAndTiming, otherDetails, trainers, ch
   $("#chargesInput").val(charges);
   $("#imgToBeUpdated").val(null);
   $("#update-name-hint").text(`${name.length}/50 characters`);
-  $("#update-description-hint").text(`${description.length}/250 characters`);
+  $("#update-description-hint").text(`${description.length}/400 characters`);
   $("#update-dnt-hint").text(`${dayAndTiming.length}/50 characters`);
   $("#update-other-hint").text(`${otherDetails.length}/100 characters`);
   $("#update-trainer-hint").text(`${trainers.length}/100 characters`);

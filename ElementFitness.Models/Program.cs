@@ -19,7 +19,7 @@ namespace ElementFitness.Models {
 
         [Required(ErrorMessage = "Program description is required.")]
         [Column("Description")]  
-        [StringLength(250)]  
+        [StringLength(400)]  
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Program day and time is required.")]

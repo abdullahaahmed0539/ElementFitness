@@ -101,8 +101,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="UpdatedProgram.Description" for="descriptionInput" class="bebas-light mt-3">Description</label>
-                    <textarea name="@Html.NameFor(m => m.UpdatedProgram.Description)" type="text" class="form-control" id="descriptionInput" rows="4">@Model.Program.Description</textarea>
-                    <small id="update-description-hint" class="form-text text-muted">@Model.Program.Description.Length/250 characters</small>
+                    <textarea name="@Html.NameFor(m => m.UpdatedProgram.Description)" type="text" class="form-control" id="descriptionInput" maxlength="400" rows="4">@Model.Program.Description</textarea>
+                    <small id="update-description-hint" class="form-text text-muted">@Model.Program.Description.Length/400 characters</small>
                 </div> 
                 <div class="form-group">
                     <label asp-for="UpdatedProgram.DayAndTiming" for="dayAndTimingInput" class="bebas-light mt-3">Day & Timing</label>

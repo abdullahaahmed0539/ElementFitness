@@ -11,28 +11,28 @@ namespace ElementFitness.Models {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OfferID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Offer name is required.")]
         [Column("Name")]
         [StringLength(50)]  
         public string? Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Offer description is required.")]
         [Column("Description")]  
+        [StringLength(400)]
         public string? Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Validity period is required.")]
         [Column("Valid_Upto")]
+        [StringLength(30)]
         public string? ValidUpto { get; set; } 
 
         [Column("Image_Link")]    
         [DataType(DataType.ImageUrl)]
         public string? ImageLink { get; set; } 
 
-        [Required]
         [Column("Created_On")]
         public DateTime? CreatedOn { get; set; }
 
-        [Required]
         [Column("Active")]
         public bool? Active { get; set; } = false;    
     }
