@@ -61,11 +61,18 @@ namespace ElementFitness.App.Pages
                     throw new InvalidModelException(errorMessage);
                 }
 
-                string imgLink = Path.Combine(WWWRoot, $"lib/offers/{displayImg.FileName}");
+                Random randomizer = new Random();
+                string randomizerNumber = "";
+                for(int i = 0; i<3; i++)
+                {
+                    randomizerNumber +=  " " + randomizer.NextDouble().ToString(); 
+                }
+
+                string imgLink = Path.Combine(WWWRoot, $"lib/offers/{randomizerNumber}{displayImg.FileName}");
                 using FileStream fileStream = new FileStream(imgLink, FileMode.Create);
                 await displayImg.CopyToAsync(fileStream);
 
-                OfferToBeAdded.ImageLink = $"~/lib/offers/{displayImg.FileName}";
+                OfferToBeAdded.ImageLink = $"~/lib/offers/{randomizerNumber}{displayImg.FileName}";
                 try
                 {
                     await _offerService.AddAsync(OfferToBeAdded)!;

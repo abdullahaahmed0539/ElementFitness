@@ -1,0 +1,30 @@
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}
+
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    display: block;
+}
+
+.img-container .delete-icon {
+    position: absolute; 
+    color: white;
+    background-color: #e51440;
+    top:5px; 
+    right:5px; 
+}
+
+.img-container .delete-icon:hover {
+    position: absolute; 
+    color: white;
+    background-color:#b7072d;
+    cursor: pointer;
+    top:5px; 
+    right:5px; 
+}

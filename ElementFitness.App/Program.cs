@@ -8,7 +8,6 @@ using ElementFitness.Utils.Configurations;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 //Injecting Services & Repos
 builder.Services.AddScoped<IProgramService, ProgramService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<ITrainerService, TrainerService>();
+builder.Services.AddScoped<IPartnerService, PartnerService>();
 
 builder.Services.AddScoped<IProgramRepo, ProgramRepo>();
 builder.Services.AddScoped<IOfferRepo, OfferRepo>();
+builder.Services.AddScoped<ITrainerRepo, TrainerRepo>();
+builder.Services.AddScoped<IPartnerRepo, PartnerRepo>();
 
 
 // Add services to the container.
@@ -48,6 +51,17 @@ TypeAdapterConfig<ElementFitness.Models.Program, ElementFitness.Models.Program>
 TypeAdapterConfig<ElementFitness.Models.Offer, ElementFitness.Models.Offer>
     .NewConfig()
     .IgnoreIf((src, dest) => src.OfferID == 0, dest => dest.OfferID)
+    .IgnoreNullValues(true);
+
+
+TypeAdapterConfig<ElementFitness.Models.Trainer, ElementFitness.Models.Trainer>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.TrainerID == 0, dest => dest.TrainerID)
+    .IgnoreNullValues(true);
+
+TypeAdapterConfig<ElementFitness.Models.Partner, ElementFitness.Models.Partner>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.PartnerID == 0, dest => dest.PartnerID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();

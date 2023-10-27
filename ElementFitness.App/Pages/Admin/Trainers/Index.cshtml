@@ -1,0 +1,141 @@
+﻿@page
+@model TrainersIndexAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Trainers";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Trainers</h1>
+    </div>    
+    <div class="mt-3 offset-1 col-5 offset-sm-3 col-sm-3 offset-md-0 col-md-3 col-lg-2">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">Add Trainer</button>
+    </div>
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+@if (Model!.Trainers?.Count() > 0)
+{
+    <div class="row">
+        <div class="col-12">
+            <p class="normal-text mt-1">The following trainers are being displayed on the website.</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.Trainer trainer in Model.Trainers)
+        {
+            <span class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card" >
+                    <span class="img-container">
+                        <img src="@Url.Content(@trainer.ImageLink)" id="program-display" class="card-img-top" alt="@(trainer.FirstName + " " + trainer.LastName)" image" height="200">
+                        <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@trainer.TrainerID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                    </span>
+                    <div class="card-body container">
+                        <h5 class="card-title  bebas-light row ms-1 overflow-auto">@trainer.FirstName @trainer.LastName</h5>
+                        <p class="card-subtitle normal-text ms-1">@trainer.JobTitle</p>
+                        <div class="row ms-1 mt-3">
+                            <a asp-page="/Admin/Trainers/Details" asp-route-ID="@trainer.TrainerID" class="btn btn-outline-light bebas-light me-1 col-4 col-md-5">View</a>
+                            <a asp-page="/Admin/Trainers/Details" asp-route-ID="@trainer.TrainerID" asp-route-enableEditing="true"  class="btn btn-outline-light bebas-light col-4 col-md-5">Update</a>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        }
+    </div>
+}
+else
+{
+    <div class="row mt-3 mt-md-1">
+        <div class="col-12">
+            <p class="normal-text mt-1">There are no trainers added. Your website is not showing any trainers currently.</p>
+        </div>
+    </div>
+}
+
+
+<!-- Add trainer Modal -->
+<div class="modal fade" id="add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Add Trainer</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetAddModal()"></button>
+      </div>
+        <form method="post" asp-page-handler="onPost" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="TrainerToBeAdded.FirstName" for="FirstNameInput" class="bebas-light mt-3">First Name*</label>
+                    <input asp-for="TrainerToBeAdded.FirstName" type="text" class="form-control" id="FirstNameInput">
+                    <small id="add-firstname-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="TrainerToBeAdded.LastName" for="LastNameInput" class="bebas-light mt-3">Last Name*</label>
+                    <input asp-for="TrainerToBeAdded.LastName" type="text" class="form-control" id="LastNameInput">
+                    <small id="add-lastname-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="TrainerToBeAdded.JobTitle" for="JobTitleInput" class="bebas-light mt-3">Job Title*</label>
+                    <input asp-for="TrainerToBeAdded.JobTitle" type="text" class="form-control" id="JobTitleInput">
+                    <small id="add-jobtitle-hint" class="form-text text-muted">0/100 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TrainerToBeAdded.Bio" for="DescriptionInput" class="bebas-light mt-3">Bio*</label>
+                    <textarea asp-for="TrainerToBeAdded.Bio" type="text" class="form-control" id="DescriptionInput" rows="4"></textarea>
+                    <small id="add-description-hint" class="form-text text-muted">0/400 characters</small>
+                </div> 
+                
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Display image*</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="displayImg" 
+                        id="DisplayImgInput" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetAddModal()">Cancel</button>
+                <button type="submit" id="add-modal-add-btn" class="btn btn-primary" hidden>Add Trainer</button>   
+                <button type="submit" id="disabled-add-modal-add-btn" class="btn btn-primary" disabled>Add Trainer</button>          
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Program Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Trainer</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the trainer?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteTrainer" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="trainerId" class="btn btn-primary">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script src="~/js/trainers.js" asp-append-version="true"></script> 
+}

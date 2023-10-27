@@ -73,7 +73,15 @@ namespace ElementFitness.App.Pages
                         Log.Error(ex.Message);
                         throw new UploadException("An error occurred while updating the offer. Please try again later."); 
                     }
-                    imgLink = Path.Combine(WWWRoot, $"lib/offers/{imgToBeUpdated.FileName}");
+
+                    Random randomizer = new Random();
+                    string randomizerNumber = "";
+                    for(int i = 0; i<3; i++)
+                    {
+                        randomizerNumber +=  " " + randomizer.NextDouble().ToString(); 
+                    }
+                    imgLink = Path.Combine(WWWRoot, $"lib/offers/{randomizerNumber}{imgToBeUpdated.FileName}");
+
                     try
                     {
                         using FileStream fileStream = new FileStream(imgLink, FileMode.Create);
@@ -86,7 +94,7 @@ namespace ElementFitness.App.Pages
                         await stream?.CopyToAsync(fileStream);
                         throw new UploadException("An error occurred while updating the offers. Please try again later."); 
                     }
-                    offerToBeUpdated.ImageLink = $"~/lib/offers/{imgToBeUpdated.FileName}";
+                    offerToBeUpdated.ImageLink = $"~/lib/offers/{randomizerNumber}{imgToBeUpdated.FileName}";
                 }
 
                 bool successfullyUpdated = await _offerService.UpdateAsync(offerToBeUpdated);

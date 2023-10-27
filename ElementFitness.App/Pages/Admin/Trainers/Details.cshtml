@@ -1,0 +1,129 @@
+﻿@page "/Admin/Trainers/{id:int}"
+@model TrainerDetailAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Trainer";
+    Layout = "_AdminLayout";
+}
+
+<div class="row mt-4">
+    <div class="col-6">
+        <h1 class="bebas-light">@Model.Trainer.FirstName @Model.Trainer.LastName</h1>
+    </div>    
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 col-md-6">
+        <img src="@Url.Content(@Model.Trainer.ImageLink)" id="program-display" class="card-img-top" alt="@(Model.Trainer.FirstName + " " + Model.Trainer.LastName) image" height="600">
+    </div>    
+    <div class="col-12 col-md-6 mt-4 mt-md-0">
+
+        @if (!string.IsNullOrWhiteSpace(Model.Trainer.JobTitle))
+        {
+            <h3 class="bebas-light">Job Title</h3>
+            <p class="normal-text break-word">@Model.Trainer.JobTitle</p>
+            <br>
+        }
+
+
+        @if (!string.IsNullOrWhiteSpace(Model.Trainer.Bio))
+        {
+            <h3 class="bebas-light">Bio</h3>
+            <p class="normal-text break-word">@Model.Trainer.Bio</p>
+            <br>
+        }
+
+        <div class="row">
+            <button class="btn btn-outline-light bebas-light col-4 col-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
+            <button class="btn btn-outline-light bebas-light col-4 col-lg-3" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+        </div>
+    </div>  
+</div>
+
+<!-- Delete Program Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Trainer</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the trainer?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteTrainer" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="trainerId" class="btn btn-primary" value="@Model.Trainer.TrainerID">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Program Modal -->
+<div class="modal fade" id="update-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Update Trainer</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetFields('@Model.Trainer.FirstName', '@Model.Trainer.LastName', '@Model.Trainer.Bio', '@Model.Trainer.JobTitle')"></button>
+      </div>
+        <form method="post" asp-page-handler="UpdateTrainer" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="UpdatedTrainer.FirstName" for="firstNameInput" class="bebas-light mt-3">First Name</label>
+                    <input asp-for="UpdatedTrainer.FirstName" type="text" class="form-control" id="firstNameInput" value="@Model.Trainer.FirstName">
+                    <small id="update-firstname-hint" class="form-text text-muted">@Model.Trainer.FirstName.Length/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedTrainer.LastName" for="lastNameInput" class="bebas-light mt-3">Last Name</label>
+                    <input asp-for="UpdatedTrainer.LastName" type="text" class="form-control" id="lastNameInput" value="@Model.Trainer.LastName">
+                    <small id="update-lastname-hint" class="form-text text-muted">@Model.Trainer.LastName.Length/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedTrainer.JobTitle" for="jobTitleInput" class="bebas-light mt-3">Job Title</label>
+                    <input asp-for="UpdatedTrainer.JobTitle" type="text" class="form-control" id="jobTitleInput" value="@Model.Trainer.JobTitle">
+                    <small id="update-jobtitle-hint" class="form-text text-muted">@Model.Trainer.JobTitle.Length/100 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedTrainer.Bio" for="descriptionInput" class="bebas-light mt-3">Bio</label>
+                    <textarea name="@Html.NameFor(m => m.UpdatedTrainer.Bio)" type="text" class="form-control" id="descriptionInput" maxlength="400" rows="4">@Model.Trainer.Bio</textarea>
+                    <small id="update-description-hint" class="form-text text-muted">@Model.Trainer.Bio.Length/400 characters</small>
+                </div>   
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Display image</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="imgToBeUpdated" 
+                        id="imgToBeUpdated" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    id="update-modal-close-btn" 
+                    class="btn btn-secondary bebas-light cancel-btn" 
+                    data-bs-dismiss="modal" 
+                    onclick="resetFields('@Model.Trainer.FirstName', '@Model.Trainer.LastName', '@Model.Trainer.Bio', '@Model.Trainer.JobTitle')">Cancel</button>
+                <button type="submit" id="update-modal-update-btn"  class="btn btn-primary">Update Trainer</button>   
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/trainers.js" asp-append-version="true"></script> 
+}

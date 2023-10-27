@@ -14,28 +14,29 @@ namespace ElementFitness.Models {
 
         [Required]
         [Column("First_Name")]
+        [StringLength(50)]
         public string? FirstName { get; set; }
 
         [Required]
         [Column("Last_Name")]
+        [StringLength(50)]
         public string? LastName { get; set; } 
 
 
         [Required]
         [Column("Job_Title")]  
-        [StringLength(20)]  
+        [StringLength(100)]  
         public string? JobTitle { get; set; } 
 
         [Required]
         [Column("Bio")]  
-        [StringLength(250)]
+        [StringLength(400)]
         public string? Bio { get; set; } 
 
         [Column("Image_Link")]    
         [DataType(DataType.ImageUrl)]
         public string? ImageLink { get; set; } 
        
-        [Required]
         [Column("Created_On")]
         
         public DateTime? CreatedOn { get; set; } 

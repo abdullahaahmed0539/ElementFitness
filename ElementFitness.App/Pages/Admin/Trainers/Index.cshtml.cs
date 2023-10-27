@@ -9,35 +9,34 @@ using Serilog;
 namespace ElementFitness.App.Pages
 {
     [Authorize(Roles = "administrator")]
-    public class ProgramsIndexAdminViewModel : PageModel
+    public class TrainersIndexAdminViewModel : PageModel
     {
         private readonly IWebHostEnvironment _environment;
         private readonly string WWWRoot;
-        private readonly IProgramService _programService;
-        public IEnumerable<Models.Program>? Programs { get; private set;}
+        private readonly ITrainerService _trainerService;
+        public IEnumerable<Models.Trainer>? Trainers { get; private set;}
 
         [BindProperty]
-        public Models.Program? ProgramToBeAdded { get; set; }
+        public Models.Trainer? TrainerToBeAdded { get; set; }
 
 
-        public ProgramsIndexAdminViewModel(
+        public TrainersIndexAdminViewModel(
             IWebHostEnvironment environment, 
-            IProgramService programService
-            )
+            ITrainerService trainerService)
         {
-            _environment = environment;
+             _environment = environment;
             WWWRoot = _environment.WebRootPath;
-            _programService = programService;
+            _trainerService = trainerService;
         }
 
         public IActionResult OnGet()
         {
             try
             {
-                Programs = _programService.GetAll();
+                Trainers = _trainerService.GetAll();
                 return Page();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return RedirectToPage("../../Error");
@@ -49,7 +48,7 @@ namespace ElementFitness.App.Pages
             try
             {
                 if (displayImg == null)
-                    throw new UploadException("No display image is added. Please upload an image for the program");
+                    throw new UploadException("No display image is added. Please upload an image for the trainer");
 
                 if (!ModelState.IsValid)
                 {
@@ -68,28 +67,27 @@ namespace ElementFitness.App.Pages
                 {
                     randomizerNumber +=  " " + randomizer.NextDouble().ToString(); 
                 }
-                string imgLink = Path.Combine(WWWRoot, $"lib/programs/{randomizerNumber}{displayImg.FileName}");
+
+                string imgLink = Path.Combine(WWWRoot, $"lib/trainers/{randomizerNumber}{displayImg.FileName}");
                 using FileStream fileStream = new FileStream(imgLink, FileMode.Create);
                 await displayImg.CopyToAsync(fileStream);
 
-                ProgramToBeAdded.ImageLink = $"~/lib/programs/{randomizerNumber}{displayImg.FileName}";
+                TrainerToBeAdded.ImageLink = $"~/lib/trainers/{randomizerNumber}{displayImg.FileName}";
                 try
                 {
-                    await _programService.AddAsync(ProgramToBeAdded)!;
-                    ProgramToBeAdded.Name = "";
-                    ProgramToBeAdded = null;
+                    await _trainerService.AddAsync(TrainerToBeAdded)!;
+                    TrainerToBeAdded = null;
                     return RedirectToPage("./Index");
                 }
                 catch(Exception ex)
                 {
                     Image.Delete(imgLink);
-                    ProgramToBeAdded = null;
-                    throw new DatabaseException("An error occurred while adding the program. Please try again later.");
+                    TrainerToBeAdded = null;
+                    throw new DatabaseException("An error occurred while adding the trainer. Please try again later.");
                 }
             }
             catch(Exception ex)
             {
-
                 if (ex is DatabaseException || ex is InvalidModelException || ex is UploadException)
                 {
                     ViewData["ErrorMessage"] = ex.Message;
@@ -99,20 +97,18 @@ namespace ElementFitness.App.Pages
                 Log.Error(ex.Message);
                 return RedirectToPage("../../Error");
             }
-
         }
-    
-        public async Task<IActionResult> OnPostDeleteProgram(int programId)
+
+        public async Task<IActionResult> OnPostDeleteTrainer(int trainerId)
         {
             try
             {
-
-                Models.Program programToBeDeleted =  _programService.GetById(programId);
-                string? imageLink = programToBeDeleted?.ImageLink;
-                bool successfullyDeleted = await _programService.DeleteAsync(programId);
+                Models.Trainer trainerToBeDeleted = _trainerService.GetById(trainerId);
+                string? imageLink = trainerToBeDeleted?.ImageLink;
+                bool successfullyDeleted = await _trainerService.DeleteAsync(trainerId);
                 if (!successfullyDeleted)
-                    throw new DatabaseException("An error occurred while deleting the program. Please try again later.");
-                string file = Path.Combine(WWWRoot, $"lib/programs/{Path.GetFileName(imageLink)}");
+                    throw new DatabaseException("An error occurred while deleting the trainer. Please try again later.");
+                string file = Path.Combine(WWWRoot, $"lib/trainers/{Path.GetFileName(imageLink)}");
                 Image.Delete(file);
                 return RedirectToPage("./Index");
             }
@@ -128,9 +124,5 @@ namespace ElementFitness.App.Pages
                 return RedirectToPage("../../Error");
             }
         }
-    
-    
-    
-    
     }
 }

@@ -1,0 +1,10 @@
+.break-word{
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}

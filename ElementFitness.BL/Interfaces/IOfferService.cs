@@ -6,7 +6,7 @@ namespace ElementFitness.BL.Interfaces
     {
         public IEnumerable<Offer>? GetAll();
         public Offer? GetById(int id);
-        public Offer? GetByName(string programName);
+        public Offer? GetByName(string offerName);
         public Task<Offer>? AddAsync(Offer newInstance);
         public Task<bool> UpdateAsync(Offer updatedObj);
         public Task<bool> DeleteAsync(int id);
