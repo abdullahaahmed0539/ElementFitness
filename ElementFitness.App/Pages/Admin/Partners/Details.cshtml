@@ -1,0 +1,108 @@
+﻿@page "/Admin/Partners/{id:int}"
+@model PartnerDetailAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Partner";
+    Layout = "_AdminLayout";
+}
+
+<div class="row mt-4">
+    <div class="col-6">
+        <h1 class="bebas-light">@Model.Partner.Name</h1>
+    </div>    
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 col-md-6">
+        <img src="@Url.Content(@Model.Partner.ImageLink)" id="program-display" class="card-img-top" alt="@Model.Partner.Name image" height="600">
+    </div>    
+    <div class="col-12 col-md-6 mt-4 mt-md-0">
+        @if (!string.IsNullOrWhiteSpace(Model.Partner.Detail))
+        {
+            <h3 class="bebas-light">Partner Description</h3>
+            <p class="normal-text break-word">@Model.Partner.Detail</p>
+            <br>
+        }
+
+        <div class="row">
+            <button class="btn btn-outline-light bebas-light col-4 col-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
+            <button class="btn btn-outline-light bebas-light col-4 col-lg-3" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+        </div>
+    </div>  
+</div>
+
+<!-- Delete Program Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Partner</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the partner?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeletePartner" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="partnerId" class="btn btn-primary" value="@Model.Partner.PartnerID">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Program Modal -->
+<div class="modal fade" id="update-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Update Partner</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetFields('@Model.Partner.Name', '@Model.Partner.Detail')"></button>
+      </div>
+        <form method="post" asp-page-handler="UpdatePartner" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="UpdatedPartner.Name" for="nameInput" class="bebas-light mt-3">Name</label>
+                    <input asp-for="UpdatedPartner.Name" type="text" class="form-control" id="nameInput" value="@Model.Partner.Name">
+                    <small id="update-name-hint" class="form-text text-muted">@Model.Partner.Name.Length/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedPartner.Detail" for="descriptionInput" class="bebas-light mt-3">Description</label>
+                    <textarea name="@Html.NameFor(m => m.UpdatedPartner.Detail)" type="text" class="form-control" id="descriptionInput" maxlength="400" rows="4">@Model.Partner.Detail</textarea>
+                    <small id="update-description-hint" class="form-text text-muted">@Model.Partner.Detail.Length/400 characters</small>
+                </div>         
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Display image</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="imgToBeUpdated" 
+                        id="imgToBeUpdated" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    id="update-modal-close-btn" 
+                    class="btn btn-secondary bebas-light cancel-btn" 
+                    data-bs-dismiss="modal" 
+                    onclick="resetFields('@Model.Partner.Name', '@Model.Partner.Detail')">Cancel</button>
+                <button type="submit" id="update-modal-update-btn"  class="btn btn-primary">Update Program</button>   
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/partners.js" asp-append-version="true"></script> 
+}

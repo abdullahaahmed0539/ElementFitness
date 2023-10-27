@@ -18,13 +18,13 @@ namespace ElementFitness.Models {
 
         [Required]
         [Column("Detail")]  
+        [StringLength(400)]  
         public string? Detail { get; set; }
 
         [Column("Image_Link")]    
         [DataType(DataType.ImageUrl)]
         public string? ImageLink { get; set; } 
 
-        [Required]
         [Column("Created_On")]
         public DateTime? CreatedOn { get; set; }
     }
