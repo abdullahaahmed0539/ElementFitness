@@ -1,0 +1,233 @@
+@page
+@model JobListingsIndexAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Job Listings";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Job Listings</h1>
+    </div>    
+    <div class="mt-3 offset-1 col-5 offset-sm-3 col-sm-3 offset-md-0 col-md-3 col-lg-2">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">Add Job</button>
+    </div>
+</div>
+
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+@if (Model!.ActiveJobListings?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="bebas-light">Active jobs</h3>
+            <p class="normal-text mt-1">The following jobs are being listed on the website.</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.Job job in Model.ActiveJobListings)
+        {
+            <span class="col-12 mt-2">
+                    <div class="card  mb-3">
+                        <div class="row g-0">
+                            <div class="card-body">
+                                <div class="row mt-1">
+                                    <h4 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 bebas-light">@job.JobTitle</h4>
+                                    <span class="img-container col-4 col-sm-3 col-md-2 col-xl-1">
+                                        <span class="material-symbols-outlined delete-icon" data-toggle="tooltip" data-placement="top" title="Archive" onclick="archiveJobListing(@job.JobID)" data-bs-toggle="modal" data-bs-target="#archive-modal">archive</span>
+                                        <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@job.JobID')"  data-bs-toggle="modal" data-bs-target="#delete-modal" data-toggle="tooltip" data-placement="top" title="Delete">delete</span>
+                                    </span>  
+                                </div>
+                                <hr style="color: rgb(218, 218, 218);"/>
+                                <div class="row">
+                                    <h5 class="bebas-light">Requirements</h5>
+                                    @if(@job.Requirements.Length > 400)
+                                    {
+                                        <p class="normal-text" style="white-space: pre-line"> @job.Requirements.Substring(0,400)...</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="normal-text" style="white-space: pre-line"> @job.Requirements</p>
+                                    }
+                                </div>
+                                <div class="container">
+                                    <div class="row ms-1">
+                                        <a asp-page="/Admin/JobListings/Details" asp-route-ID="@job.JobID" class="btn btn-outline-light bebas-light me-2 col-4 col-sm-3  col-md-2 col-xl-1">View</a>
+                                        <a asp-page="/Admin/JobListings/Details" asp-route-ID="@job.JobID" asp-route-enableEditing="true"  class="btn btn-outline-light bebas-light col-4 col-sm-3 col-md-2 col-xl-1">Update</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+        }
+    </div>
+}
+else
+{
+    <div class="row mt-3 mt-md-1">
+        <div class="col-12">
+            <h3 class="bebas-light mt-3">Active jobs</h3>
+            <p class="normal-text mt-1">There are no active jobs listed. Your website is not showing any jobs currently.</p>
+        </div>
+    </div>
+}
+
+
+@if (Model!.ArchievedJobListings?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="bebas-light">Archived jobs</h3>
+            <p class="normal-text mt-1">The following jobs are archived and are not listed on the website.</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.Job job in Model.ArchievedJobListings)
+        {
+            <span class="col-12 mt-2">
+                    <div class="card  mb-3">
+                        <div class="row g-0">
+                            <div class="card-body">
+                                <div class="row mt-1">
+                                    <h4 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 bebas-light">@job.JobTitle</h4>
+                                    <span class="img-container col-4 col-sm-3 col-md-2 col-xl-1">
+                                        <span class="material-symbols-outlined delete-icon" data-toggle="tooltip" data-placement="top" title="Unarchive" onclick="unarchiveJobListing(@job.JobID)" data-bs-toggle="modal" data-bs-target="#unarchive-modal">Unarchive</span>
+                                        <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@job.JobID')"  data-bs-toggle="modal" data-bs-target="#delete-modal" data-toggle="tooltip" data-placement="top" title="Delete">delete</span>
+                                    </span>     
+                                </div>
+                                <hr style="color: rgb(218, 218, 218);"/>
+                                <div class="row">
+                                    <h5 class="bebas-light">Requirements</h5>
+                                    @if(@job.Requirements.Length > 400)
+                                    {
+                                        <p class="normal-text" style="white-space: pre-line"> @job.Requirements.Substring(0,400)...</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="normal-text" style="white-space: pre-line"> @job.Requirements</p>
+                                    }
+                                </div>
+                                <div class="container">
+                                    <div class="row ms-1">
+                                        <a asp-page="/Admin/JobListings/Details" asp-route-ID="@job.JobID" class="btn btn-outline-light bebas-light me-2 col-4 col-sm-3  col-md-2 col-xl-1">View</a>
+                                        <a asp-page="/Admin/JobListings/Details" asp-route-ID="@job.JobID" asp-route-enableEditing="true"  class="btn btn-outline-light bebas-light col-4 col-sm-3 col-md-2 col-xl-1">Update</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+        }
+    </div>
+}
+
+
+<!-- Add job Modal -->
+<div class="modal fade" id="add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Add Job</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetAddModal()"></button>
+      </div>
+        <form method="post" asp-page-handler="onPost" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="JobToBeAdded.JobTitle" for="JobTitleInput" class="bebas-light mt-3">Job Title*</label> 
+                    <input asp-for="JobToBeAdded.JobTitle" type="text" class="form-control" id="JobTitleInput"> 
+                    <small id="add-jobtitle-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="JobToBeAdded.Requirements" for="RequirementInput" class="bebas-light mt-3">Requirements*</label>
+                    <textarea asp-for="JobToBeAdded.Requirements" type="text" class="form-control" id="RequirementInput" rows="4"></textarea> 
+                </div> 
+                <div class="form-group">
+                    <label asp-for="JobToBeAdded.Description" for="DescriptionInput" class="bebas-light mt-3">Description*</label>
+                    <textarea asp-for="JobToBeAdded.Description" type="text" class="form-control" id="DescriptionInput" rows="4"></textarea> 
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetAddModal()">Cancel</button>
+                <button type="submit" id="add-modal-add-btn" class="btn btn-primary" hidden>Add Job</button>   
+                <button type="submit" id="disabled-add-modal-add-btn" class="btn btn-primary" disabled>Add Job</button>          
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Job Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Job Listing</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the job listing?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteJobListing" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="jobListingId" class="btn btn-primary">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Archive Job Modal -->
+<div class="modal fade" id="archive-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Archive Job Listing</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to archive the job listing? It will not be displayed on the website.</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="ArchiveJobListing" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-archive-btn" name="jobListingId" class="btn btn-primary">Archive</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Unarchive Job Modal -->
+<div class="modal fade" id="unarchive-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Unarchive Job Listing</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to unarchive the job listing? It will be displayed on the website.</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="UnarchiveJobListing" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-unarchive-btn" name="jobListingId" class="btn btn-primary">Unarchive</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.AntiForgeryToken()
+@section Scripts
+{
+    <script src="~/js/jobListing.js" asp-append-version="true"></script> 
+}
+

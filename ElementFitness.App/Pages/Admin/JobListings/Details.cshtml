@@ -1,0 +1,153 @@
+@page "/Admin/JobListings/{id:int}"
+@model JobListingDetailAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Job Listings";
+    Layout = "_AdminLayout";
+}
+
+<div class="row mt-4">
+    <div class="col-6">
+        <h1 class="bebas-light">@Model.Job.JobTitle</h1>
+    </div>  
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+<div class="row mt-4">   
+    <div class="">
+        @if (!string.IsNullOrWhiteSpace(Model.Job.Requirements))
+        {
+            <h4 class="bebas-light">Requirements</h4>
+            <p class="normal-text break-word">@Model.Job.Requirements</p>
+            <br>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.Job.Description))
+        {
+            <h4 class="bebas-light">Description</h4>
+            <p class="normal-text">@Model.Job.Description</p>
+            <br>
+        }
+
+
+        <div class="row">
+            <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
+            @if(Model.Job.Active == true)
+            {
+                <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</button>
+            }  
+            else
+            { 
+                <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#unarchive-modal">UnArchive</button>
+            }
+            <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 " data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+        </div>
+    </div>  
+</div>
+
+<!-- Delete job Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Job</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the job?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteJobListing" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="jobListingId" class="btn btn-primary" value="@Model.Job.JobID">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Archive job Modal -->
+<div class="modal fade" id="archive-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Archive Job Listing</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to archive the job? It will not be displayed on your website.</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="ArchiveJobListing" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="jobListingId" class="btn btn-primary" value="@Model.Job.JobID">Archive</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UnArchive job Modal -->
+<div class="modal fade" id="unarchive-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Unarchive Job Listing</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to unarchive the job? It will be displayed on your website.</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="UnarchiveJobListing" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="jobListingId" class="btn btn-primary" value="@Model.Job.JobID">Unarchive</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- update job Modal -->
+<div class="modal fade" id="update-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content"> 
+        <div class="modal-header">
+            <h4 class="modal-title" id="staticBackdropLabel">Update Job</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetFields('@Model.Job.JobTitle', '@Model.Job.Description', '@Model.Job.Requirements')"></button>
+        </div>
+        <form method="post" asp-page-handler="UpdateJob" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="UpdatedJob.JobTitle" for="jobTitleInput" class="bebas-light mt-3">Job Title*</label> 
+                    <input asp-for="UpdatedJob.JobTitle" type="text" class="form-control" id="jobTitleInput" value="@Model.Job.JobTitle"> 
+                    <small id="update-jobtitle-hint" class="form-text text-muted">@Model.Job.JobTitle.Length/50 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedJob.Requirements" for="requirementInput" class="bebas-light mt-3">Requirements*</label>
+                    <textarea name="@Html.NameFor(j => j.UpdatedJob.Requirements)" type="text" class="form-control" id="requirementInput" rows="4">@Model.Job.Requirements</textarea> 
+                </div> 
+                <div class="form-group">
+                    <label asp-for="UpdatedJob.Description" for="descriptionInput" class="bebas-light mt-3">Description*</label>
+                    <textarea name="@Html.NameFor(j => j.UpdatedJob.Description)" type="text" class="form-control" id="descriptionInput" rows="4">@Model.Job.Description</textarea> 
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="update-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetFields('@Model.Job.JobTitle', '@Model.Job.Description', '@Model.Job.Requirements')">Cancel</button>
+                <button type="submit" id="update-modal-add-btn" class="btn btn-primary">Update Job</button>   
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/jobListing.js" asp-append-version="true"></script> 
+}

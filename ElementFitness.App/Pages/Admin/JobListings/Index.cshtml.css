@@ -1,0 +1,32 @@
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}
+
+
+.img-container .delete-icon {
+    color: white;
+    background-color: #e51440;
+    /* margin-left: 40px; */
+}
+
+.img-container .delete-icon:hover {
+    color: white;
+    background-color:#b7072d;
+    cursor: pointer;
+}
+
+.card-title{
+    color: white;
+}
+
+.card-body{
+    margin-left: 10px;
+}
+
+.card{
+    background-color: #2D2D2D;
+}
+
+

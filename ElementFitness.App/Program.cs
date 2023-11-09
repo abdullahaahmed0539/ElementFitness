@@ -18,12 +18,14 @@ builder.Services.AddTransient<IOfferService, OfferService>();
 builder.Services.AddTransient<ITrainerService, TrainerService>();
 builder.Services.AddTransient<IPartnerService, PartnerService>();
 builder.Services.AddTransient<IEnquiryService, EnquiryService>();
+builder.Services.AddTransient<IJobListingService, JobListingService>();
 
 builder.Services.AddTransient<IProgramRepo, ProgramRepo>();
 builder.Services.AddTransient<IOfferRepo, OfferRepo>();
 builder.Services.AddTransient<ITrainerRepo, TrainerRepo>();
 builder.Services.AddTransient<IPartnerRepo, PartnerRepo>();
 builder.Services.AddTransient<IEnquiryRepo, EnquiryRepo>();
+builder.Services.AddTransient<IJobListingRepo, JobListingRepo>();
 
 
 // Add services to the container.
@@ -70,6 +72,12 @@ TypeAdapterConfig<ElementFitness.Models.Partner, ElementFitness.Models.Partner>
 TypeAdapterConfig<ElementFitness.Models.Enquiry, ElementFitness.Models.Enquiry>
     .NewConfig()
     .IgnoreIf((src, dest) => src.EnquiryID == 0, dest => dest.EnquiryID)
+    .IgnoreNullValues(true);
+
+TypeAdapterConfig<ElementFitness.Models.Job, ElementFitness.Models.Job>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
+    .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();

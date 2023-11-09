@@ -97,7 +97,6 @@ namespace ElementFitness.App.Pages
         {
             try
             {
-                Enquiry? offerToBeDeleted = _enquiryService.GetById(enquiryId);
                 bool successfullyDeleted = await _enquiryService.DeleteAsync(enquiryId);
                 if (!successfullyDeleted)
                     throw new DatabaseException("An error occurred while deleting the enquiry. Please try again later.");
