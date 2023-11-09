@@ -1,0 +1,196 @@
+﻿@page
+@model EnquiriesIndexAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Enquiries";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Enquires</h1>
+    </div>    
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+@if (Model!.UnreadEnquiries?.Count() > 0 || Model!.UnrespondedEnquiries?.Count() > 0 || Model!.RespondedEnquiries?.Count() > 0)
+{
+
+        @if(@Model!.UnreadEnquiries?.Count() > 0)
+        {
+            <div class="row mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="bebas-light mt-1">Unread Enquiries</h4>
+                    </div>
+                </div>
+
+                @foreach(Models.Enquiry enquiry in Model.UnreadEnquiries)
+                {
+                    <span class="col-12 mt-2">
+                        <div class="card  mb-3">
+                            <div class="row g-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <h5 class="card-title col-10 col-md-11">Message by: @enquiry.Contact.FirstName @enquiry.Contact.LastName </h5>
+                                        <span class="img-container col-2 col-md-1">
+                                            <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@enquiry.EnquiryID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                                        </span>  
+                                    </div>  
+                                    <p class="card-text"><small class="text-muted">Messaged on: @enquiry.CreatedOn.ToString()</small></p>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#view-modal" onclick="viewMessage('@enquiry.EnquiryID','@enquiry.Read', '@enquiry.Contact.FirstName', '@enquiry.Contact.LastName', '@enquiry.Message', '@enquiry.Objectives', '@enquiry.SuitableContactTime', '@enquiry.Resolved')">See message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                }
+            </div>
+        }
+       
+
+        @if(@Model!.UnrespondedEnquiries?.Count() > 0)
+        {
+            <div class="row mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="bebas-light mt-1">Unresponded Enquiries</h4>
+                    </div>
+                </div>
+
+            @foreach(Models.Enquiry enquiry in Model.UnrespondedEnquiries)
+            {
+                <span class="col-12 mt-2">
+                    <div class="card  mb-3">
+                        <div class="row g-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="card-title col-10 col-md-11">Message by: @enquiry.Contact.FirstName @enquiry.Contact.LastName </h5>
+                                    <span class="img-container col-2 col-md-1">
+                                        <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@enquiry.EnquiryID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                                    </span>     
+                                </div>
+                                <p class="card-text"><small class="text-muted">Messaged on: @enquiry.CreatedOn.ToString()</small></p>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#view-modal" onclick="viewMessage('@enquiry.EnquiryID','@enquiry.Read', '@enquiry.Contact.FirstName', '@enquiry.Contact.LastName', '@enquiry.Message', '@enquiry.Objectives', '@enquiry.SuitableContactTime', '@enquiry.Resolved')">See message</button>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            }
+        </div>
+        }
+        
+
+        @if(@Model!.RespondedEnquiries?.Count() > 0)
+        {
+            <div class="row mt-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="bebas-light mt-1">Responded Enquiries</h4>
+                    </div>
+                </div>
+
+                @foreach(Models.Enquiry enquiry in Model.RespondedEnquiries)
+                {
+                    <span class="col-12 mt-2">
+                        <div class="card  mb-3">
+                            <div class="row g-0">
+                                <div class="card-body">
+                                        <div class="row">
+                                            <h5 class="card-title col-10 col-md-11">Message by: @enquiry.Contact.FirstName @enquiry.Contact.LastName </h5>
+                                            <span class="img-container col-2 col-md-1">
+                                                <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@enquiry.EnquiryID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                                            </span>
+                                        </div>
+                                    <p class="card-text"><small class="text-muted">Messaged on: @enquiry.CreatedOn.ToString()</small></p>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#view-modal" onclick="viewMessage('@enquiry.EnquiryID','@enquiry.Read', '@enquiry.Contact.FirstName', '@enquiry.Contact.LastName', '@enquiry.Message', '@enquiry.Objectives', '@enquiry.SuitableContactTime', '@enquiry.Resolved')">See message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                }
+            </div>
+        }
+
+}
+else
+{
+    <div class="row mt-3 mt-md-1">
+        <div class="col-12">
+            <p class="normal-text mt-1">There are no enquiries currently.</p>
+        </div>
+    </div>
+}
+
+
+<!-- View Enquiry Modal -->
+ <div class="modal fade" id="view-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Enquiry Detail</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetModal()"></button>
+      </div>
+        <form method="post" asp-page-handler="MarkAsResolved">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="bebas-light mt-3">First Name</label>
+                    <input type="text" class="form-control" id="firstname" disabled>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="bebas-light mt-3">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" disabled>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="bebas-light mt-3">Objective</label>
+                    <input type="text" class="form-control" id="objective" disabled>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="bebas-light mt-3">Suitable time</label>
+                    <input type="text" class="form-control" id="suitable-time" disabled>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="bebas-light mt-3">Message</label>
+                    <textarea  type="text" class="form-control" rows="4" id="message" disabled></textarea>
+                </div> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetModal()">Cancel</button>         
+                <button type="submit" id="resolve-modal-btn" class="btn btn-primary" name="enquiryID" data-bs-dismiss="modal">Mark as resolved</button>         
+            </div>
+        </form>
+    </div>
+  </div>
+</div> 
+
+<!-- Delete Program Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Enquiry</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the enquiry?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteEnquiry" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="enquiryId" class="btn btn-primary">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.AntiForgeryToken()
+@section Scripts
+{
+    <script src="~/js/enquiries.js" asp-append-version="true"></script> 
+}

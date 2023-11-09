@@ -13,15 +13,17 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 //Injecting Services & Repos
-builder.Services.AddScoped<IProgramService, ProgramService>();
-builder.Services.AddScoped<IOfferService, OfferService>();
-builder.Services.AddScoped<ITrainerService, TrainerService>();
-builder.Services.AddScoped<IPartnerService, PartnerService>();
+builder.Services.AddTransient<IProgramService, ProgramService>();
+builder.Services.AddTransient<IOfferService, OfferService>();
+builder.Services.AddTransient<ITrainerService, TrainerService>();
+builder.Services.AddTransient<IPartnerService, PartnerService>();
+builder.Services.AddTransient<IEnquiryService, EnquiryService>();
 
-builder.Services.AddScoped<IProgramRepo, ProgramRepo>();
-builder.Services.AddScoped<IOfferRepo, OfferRepo>();
-builder.Services.AddScoped<ITrainerRepo, TrainerRepo>();
-builder.Services.AddScoped<IPartnerRepo, PartnerRepo>();
+builder.Services.AddTransient<IProgramRepo, ProgramRepo>();
+builder.Services.AddTransient<IOfferRepo, OfferRepo>();
+builder.Services.AddTransient<ITrainerRepo, TrainerRepo>();
+builder.Services.AddTransient<IPartnerRepo, PartnerRepo>();
+builder.Services.AddTransient<IEnquiryRepo, EnquiryRepo>();
 
 
 // Add services to the container.
@@ -31,6 +33,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseNpgsql(AppSettings.PostGresConnectionString, b => b.MigrationsAssembly("ElementFitness.App"));
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Host.UseSerilog();
 IConfiguration configuration = builder.Configuration;
 AppSettings.IntializeConfiguration(configuration);
@@ -62,6 +65,11 @@ TypeAdapterConfig<ElementFitness.Models.Trainer, ElementFitness.Models.Trainer>
 TypeAdapterConfig<ElementFitness.Models.Partner, ElementFitness.Models.Partner>
     .NewConfig()
     .IgnoreIf((src, dest) => src.PartnerID == 0, dest => dest.PartnerID)
+    .IgnoreNullValues(true);
+
+TypeAdapterConfig<ElementFitness.Models.Enquiry, ElementFitness.Models.Enquiry>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.EnquiryID == 0, dest => dest.EnquiryID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();

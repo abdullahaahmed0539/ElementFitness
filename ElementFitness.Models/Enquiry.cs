@@ -35,9 +35,14 @@ namespace ElementFitness.Models {
 
         [Required]
         [Column("Resolved")]
-        public bool? Resolved { get; set; } = false;   
+        public bool? Resolved { get; set; } = false;
+
+        [Required]
+        [Column("ContactID")]
+        public int ContactID { get; set; }
 
         public Contact Contact { get; set; } = null!;  
+
     }
 }
 

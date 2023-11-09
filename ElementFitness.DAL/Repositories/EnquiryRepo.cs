@@ -5,43 +5,48 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ElementFitness.DAL.Repositories 
 {
-    public class OfferRepo: IOfferRepo, IDisposable
+    public class EnquiryRepo: IEnquiryRepo, IDisposable
     {
 
         private readonly ApplicationDbContext _dbContext;
 
-        public OfferRepo(ApplicationDbContext dbContext)
+        public EnquiryRepo(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Offer>? GetAll()
+        public IEnumerable<Enquiry>? GetAll()
         {
-            return _dbContext.Offers?.OrderByDescending(p => p.CreatedOn).ToList();
+            IEnumerable<Enquiry>? enquiries = _dbContext.Enquiries?.OrderByDescending(e => e.CreatedOn).ToList();
+            foreach (Enquiry enquiry in enquiries)
+            {
+                enquiry.Contact =  _dbContext.Contacts.FirstOrDefault( c => c.ContactID == enquiry.ContactID);
+            }
+            return enquiries;
+
         }
 
-        public Offer? GetByCondition(Func<Offer, bool> predicate)
+        public Enquiry? GetByCondition(Func<Enquiry, bool> predicate)
         {
-            return _dbContext.Offers?.FirstOrDefault(predicate);;
+            return _dbContext.Enquiries?.FirstOrDefault(predicate);;
         }
 
-        public async Task<Offer>? AddAsync(Offer newInstance)
+        public async Task<Enquiry>? AddAsync(Enquiry newInstance)
         {
             if(newInstance == null)
-                throw new NullReferenceException("Could not add new Offer. Offer value cannot be null.");
+                throw new NullReferenceException("Could not add new Enquiry. Enquiry value cannot be null.");
             
             newInstance.CreatedOn = DateTime.UtcNow;
-            newInstance.Active = true;
             
-            await _dbContext.Offers.AddAsync(newInstance);
+            await _dbContext.Enquiries.AddAsync(newInstance);
             await _dbContext.SaveChangesAsync();
             return newInstance;
         }
 
-        public async Task<bool> UpdateAsync(Offer updatedObj)
+        public async Task<bool> UpdateAsync(Enquiry updatedObj)
         {
             if (updatedObj == null)
-                throw new NullReferenceException("Could not update the Offer. Offer value cannot be null.");
+                throw new NullReferenceException("Could not update the Enquiry. Enquiry value cannot be null.");
             
             _dbContext.Entry(updatedObj).State = EntityState.Modified;
             return (await _dbContext.SaveChangesAsync()) == 1 ? true : false ;
@@ -51,11 +56,11 @@ namespace ElementFitness.DAL.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            Offer? offerToBeDelete = await _dbContext.Offers.FindAsync(id);
-            if (offerToBeDelete == null)
-                throw new NullReferenceException("Could not delete the Offer. Offer value cannot be null.");
+            Enquiry? enquiryToBeDelete = await _dbContext.Enquiries.FindAsync(id);
+            if (enquiryToBeDelete == null)
+                throw new NullReferenceException("Could not delete the Enquiry. Enquiry value cannot be null.");
             
-            _dbContext.Offers.Remove(offerToBeDelete);
+            _dbContext.Enquiries.Remove(enquiryToBeDelete);
             return (await _dbContext.SaveChangesAsync()) == 1 ? true : false;
         }
 

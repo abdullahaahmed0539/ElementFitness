@@ -43,7 +43,7 @@ namespace ElementFitness.Models {
         [Column("Converted_On")]
         public DateTime? ConvertedOn { get; set; }
 
-        public ICollection<Enquiry> Enquiries { get; } = new List<Enquiry>(); 
+        public ICollection<Enquiry> Enquiries { get; set; } = new List<Enquiry>(); 
     }
 
 
