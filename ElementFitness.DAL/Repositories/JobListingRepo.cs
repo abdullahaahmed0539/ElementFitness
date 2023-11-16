@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using ElementFitness.DAL.Data;
 using ElementFitness.DAL.Interfaces;
 using ElementFitness.Models;
@@ -60,8 +61,33 @@ namespace ElementFitness.DAL.Repositories
             if (jobToBeDelete == null)
                 throw new NullReferenceException("Could not delete the Job. Job value cannot be null.");
             
-            _dbContext.Jobs.Remove(jobToBeDelete);
-            return (await _dbContext.SaveChangesAsync()) == 1 ? true : false;
+            IEnumerable<JobApplicant> jobApplicants = _dbContext.JobApplicants.Where( ja => ja.JobID == id).ToList();
+            foreach(JobApplicant applicant in jobApplicants)
+            {
+                applicant.JobID = 0;
+            }
+
+
+
+            using var transaction = _dbContext.Database.BeginTransaction();
+
+            try
+            {
+                _dbContext.JobApplicants.UpdateRange(jobApplicants);
+                await _dbContext.SaveChangesAsync();
+
+                _dbContext.Jobs.Remove(jobToBeDelete);
+                await _dbContext.SaveChangesAsync();
+
+                transaction.Commit();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                return false;
+            }
+            
         }
 
         private bool disposed = false;

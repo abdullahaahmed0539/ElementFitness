@@ -43,9 +43,6 @@ const resetAddModal = () => {
 };
 
 const resetFields = (jobtitle, description, requirements) => {
-  // console.log(jobtitle)
-  // console.log(description);
-  // console.log(requirements);
   $("#jobTitleInput").val(jobtitle);
   $("#descriptionInput").val(description);
   $("#requirementInput").val(requirements);

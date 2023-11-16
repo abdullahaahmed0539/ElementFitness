@@ -1,0 +1,157 @@
+@page
+@model JobApplicantIndexAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Job Applications";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Job Applications</h1>
+    </div>    
+</div>
+
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+@if (Model!.UnreadJobApplicants?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="bebas-light">Unread Job Applications</h3>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.JobApplicant unReadJobApplicant in Model.UnreadJobApplicants)
+        {
+            <span class="col-12 mt-2">
+                    <div class="card  mb-3">
+                        <div class="row g-0">
+                            <div class="card-body">
+                                 <span class="img-container">
+                                    <h4 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 bebas-light">@unReadJobApplicant.FirstName @unReadJobApplicant.LastName</h4>
+                                    <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@unReadJobApplicant.JobApplicantID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                                 </span>
+                                <div class="row mt-1">
+                                    <h6 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 normal-text"><a asp-page="/Admin/JobListings/Details" asp-route-ID="@unReadJobApplicant.JobID" style="color:#FFFFFF;">Role: @unReadJobApplicant.Job.JobTitle</a></h6>
+                                </div>
+                                <hr style="color: rgb(218, 218, 218);"/>
+                                <div class="container">
+                                    <div class="row ms-1">
+                                        <a asp-page="/Admin/JobApplications/Details" asp-route-ID="@unReadJobApplicant.JobApplicantID" class="btn btn-outline-light bebas-light me-2 col-4 col-sm-3  col-md-2 col-xl-1">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+        }
+    </div>
+}
+
+@if (Model!.ReadJobApplicants?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            @if (Model!.UnreadJobApplicants?.Count() > 0)
+            {
+                <h3 class="bebas-light">Other Job Applications</h3>
+            }
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.JobApplicant readJobApplicants in Model.ReadJobApplicants)
+        {
+            <span class="col-12 mt-2">
+                    <div class="card  mb-3">
+                        <div class="row g-0">
+                            <div class="card-body">
+                                 <span class="img-container">
+                                    <h4 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 bebas-light">@readJobApplicants.FirstName @readJobApplicants.LastName</h4>
+                                    <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@readJobApplicants.JobApplicantID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                                 </span>
+                                <div class="row mt-1">
+                                    <h6 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 normal-text"><a asp-page="/Admin/JobListings/Details" asp-route-ID="@readJobApplicants.JobID" style="color:#FFFFFF;">Role: @readJobApplicants.Job.JobTitle</a></h6>
+                                </div>
+                                <hr style="color: rgb(218, 218, 218);"/>
+                                <div class="container">
+                                    <div class="row ms-1">
+                                        <a asp-page="/Admin/JobApplications/Details" asp-route-ID="@readJobApplicants.JobApplicantID" class="btn btn-outline-light bebas-light me-2 col-4 col-sm-3  col-md-2 col-xl-1">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+        }
+    </div>
+}
+
+@if (Model!.ArchivedJobApplicants?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="bebas-light">Archived Job Applications</h3>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.JobApplicant archivedJobApplicants in Model.ArchivedJobApplicants)
+        {
+            <span class="col-12 mt-2">
+                    <div class="card  mb-3">
+                        <div class="row g-0">
+                            <div class="card-body">
+                                 <span class="img-container">
+                                    <h4 class="card-title col-8 col-sm-9 col-md-10 col-xl-11 bebas-light">@archivedJobApplicants.FirstName @archivedJobApplicants.LastName</h4>
+                                    <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@archivedJobApplicants.JobApplicantID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                                 </span>
+                                <hr style="color: rgb(218, 218, 218);"/>
+                                <div class="container">
+                                    <div class="row ms-1">
+                                        <a  asp-page="/Admin/JobApplications/Details" asp-route-ID="@archivedJobApplicants.JobApplicantID" class="btn btn-outline-light bebas-light me-2 col-4 col-sm-3  col-md-2 col-xl-1">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+        }
+    </div>
+}
+
+@if (Model!.ArchivedJobApplicants?.Count() == 0 && Model!.UnreadJobApplicants?.Count() == 0  && Model!.ReadJobApplicants?.Count() == 0)
+{
+    <p class="normal-text mt-1">There are no job applications.</p>
+}
+
+<!-- Delete Job Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Job Application</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the job application?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteJobApplication" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="jobApplicationId" class="btn btn-primary">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+@Html.AntiForgeryToken()
+@section Scripts
+{
+    <script src="~/js/jobApplications.js" asp-append-version="true"></script> 
+}
+

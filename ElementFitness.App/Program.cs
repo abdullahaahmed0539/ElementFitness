@@ -19,6 +19,7 @@ builder.Services.AddTransient<ITrainerService, TrainerService>();
 builder.Services.AddTransient<IPartnerService, PartnerService>();
 builder.Services.AddTransient<IEnquiryService, EnquiryService>();
 builder.Services.AddTransient<IJobListingService, JobListingService>();
+builder.Services.AddTransient<IJobApplicantService, JobApplicantService>();
 
 builder.Services.AddTransient<IProgramRepo, ProgramRepo>();
 builder.Services.AddTransient<IOfferRepo, OfferRepo>();
@@ -26,6 +27,8 @@ builder.Services.AddTransient<ITrainerRepo, TrainerRepo>();
 builder.Services.AddTransient<IPartnerRepo, PartnerRepo>();
 builder.Services.AddTransient<IEnquiryRepo, EnquiryRepo>();
 builder.Services.AddTransient<IJobListingRepo, JobListingRepo>();
+builder.Services.AddTransient<IJobApplicantRepo, JobApplicantRepo>();
+
 
 
 // Add services to the container.
@@ -36,7 +39,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Host.UseSerilog();
+// builder.Host.UseSerilog();
 IConfiguration configuration = builder.Configuration;
 AppSettings.IntializeConfiguration(configuration);
 
@@ -78,6 +81,12 @@ TypeAdapterConfig<ElementFitness.Models.Job, ElementFitness.Models.Job>
     .NewConfig()
     .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
     .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
+    .IgnoreNullValues(true);
+
+TypeAdapterConfig<ElementFitness.Models.JobApplicant, ElementFitness.Models.JobApplicant>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.JobApplicantID == 0, dest => dest.JobApplicantID)
+    .IgnoreIf((src, dest) => src.JobApplicantID == 0, dest => dest.JobApplicantID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();

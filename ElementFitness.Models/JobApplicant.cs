@@ -38,6 +38,12 @@ namespace ElementFitness.Models {
         [Column("Application_Read")]
         public bool? ApplicationRead { get; set; } = false;
 
+
+        [Required]
+        [Column("JobID")]
+        public int JobID { get; set; }
+
+
         public Job Job { get; set; } = null!; 
 
         [Required]

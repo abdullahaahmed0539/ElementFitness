@@ -16,35 +16,37 @@
 </div>
 
 <div class="row mt-4">   
-    <div class="">
         @if (!string.IsNullOrWhiteSpace(Model.Job.Requirements))
         {
+          <div class="row mb-2">
             <h4 class="bebas-light">Requirements</h4>
             <p class="normal-text break-word">@Model.Job.Requirements</p>
             <br>
+          </div>
         }
 
         @if (!string.IsNullOrWhiteSpace(Model.Job.Description))
         {
+          <div class="row mb-2">
             <h4 class="bebas-light">Description</h4>
             <p class="normal-text">@Model.Job.Description</p>
             <br>
+          </div>
         }
 
 
-        <div class="row">
-            <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
+        <div class="row ms-1">
+            <button class="btn btn-outline-light bebas-light col-3 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#update-modal">Update</button>
             @if(Model.Job.Active == true)
             {
-                <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</button>
+                <button class="btn btn-outline-light bebas-light col-3 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</button>
             }  
             else
             { 
-                <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#unarchive-modal">UnArchive</button>
+                <button class="btn btn-outline-light bebas-light col-3 col-md-2 col-lg-1 me-2" data-bs-toggle="modal" data-bs-target="#unarchive-modal">UnArchive</button>
             }
-            <button class="btn btn-outline-light bebas-light col-4 col-md-2 col-lg-1 " data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+            <button class="btn btn-outline-light bebas-light col-3 col-md-2 col-lg-1 " data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
         </div>
-    </div>  
 </div>
 
 <!-- Delete job Modal -->
@@ -56,7 +58,7 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete the job?</p>
+        <p>Are you sure you want to delete the job? All the job applications associated with the job will be archived.</p>
       </div>
       <div class="modal-footer">
         <form asp-page-handler="DeleteJobListing" method="post" >        
