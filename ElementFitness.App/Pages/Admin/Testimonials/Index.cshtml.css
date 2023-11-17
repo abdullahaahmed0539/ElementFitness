@@ -1,0 +1,50 @@
+﻿.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}
+
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    display: block;
+}
+
+.img-container .delete-icon {
+    position: absolute; 
+    color: white;
+    background-color: #e51440;
+    top:5px; 
+    right:5px; 
+}
+
+.img-container .delete-icon:hover {
+    position: absolute; 
+    color: white;
+    background-color:#b7072d;
+    cursor: pointer;
+    top:5px; 
+    right:5px; 
+}
+
+.img-container .edit-icon {
+    position: absolute; 
+    color: white;
+    top:5px; 
+    right:35px; 
+}
+
+.img-container .edit-icon:hover {
+    position: absolute; 
+    color: rgb(241, 208, 208);
+    cursor: pointer;
+    top:5px; 
+    right:35px; 
+}
+
+.star-icon{
+    color: white;
+    border-color: white;
+}

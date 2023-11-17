@@ -1,0 +1,216 @@
+﻿@page
+@model TestimonialsAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Testimonials";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Testimonials</h1>
+    </div>    
+    <div class="mt-3 offset-1 col-5 offset-sm-3 col-sm-3 offset-md-0 col-md-3 col-lg-2">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">Add Testimonials</button>
+    </div>
+</div>
+
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+
+@* <div class="row">
+        <div class="col-12">
+            <h3 class="bebas-light">Google Reviews</h3>
+            <p class="normal-text mt-1">The following testimonials are being displayed on the website.</p>
+        </div>
+    </div> *@
+
+@if (Model!.Testimonials?.Count() > 0)
+{
+    <div class="row">
+        <div class="col-12">
+            <h3 class="bebas-light mt-3">Custom Testimonials</h3>
+            <p class="normal-text mt-1">The following testimonials are being displayed on the website.</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach(Models.Testimonial testimonial in Model.Testimonials)
+        {
+            <span class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card" >
+                    <span class="img-container">
+                        <img src="@Url.Content(@testimonial.ImageLink)" id="program-display" class="card-img-top" alt="@testimonial.Name image" height="200">
+                        <span class="material-symbols-outlined edit-icon" onclick="setFields('@testimonial.Name', '@testimonial.Description','@testimonial.Stars', '@testimonial.TestimonialID')" data-bs-toggle="modal" data-bs-target="#update-modal">edit</span>
+                        <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@testimonial.TestimonialID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
+                    </span>
+                    <div class="card-body container">
+                        <h5 class="card-title  bebas-light row ms-1 overflow-auto">@testimonial.Name</h5>
+                        <div class="row mb-3">
+                            @for(int i = 0; i<testimonial.Stars; i++)
+                            {
+                                <span class="material-symbols-outlined star-icon col-1">star</span>
+                            }
+                        </div>
+                        <p class="card-text normal-text">@testimonial.Description</p>
+                    </div>
+                </div>
+            </span>
+        }
+    </div>
+}
+else
+{
+    <div class="row mt-3 mt-md-1">
+        <div class="col-12">
+            <p class="normal-text mt-1">There are no testimonials added. Your website is not showing any testimonials currently.</p>
+        </div>
+    </div>
+}
+
+
+<!-- Add testimonial Modal -->
+<div class="modal fade" id="add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Add Testimonial</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetAddModal()"></button>
+      </div>
+        <form method="post" asp-page-handler="onPost" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="TestimonialToBeAdded.Name" for="NameInput" class="bebas-light mt-3">Name*</label>
+                    <input asp-for="TestimonialToBeAdded.Name" type="text" class="form-control" id="NameInput">
+                    <small id="add-name-hint" class="form-text text-muted">0/25 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TestimonialToBeAdded.Description" for="DescriptionInput" class="bebas-light mt-3">Description*</label>
+                    <textarea asp-for="TestimonialToBeAdded.Description" type="text" class="form-control" id="DescriptionInput" rows="4"></textarea>
+                    <small id="add-description-hint" class="form-text text-muted">0/200 characters</small>
+                </div> 
+                <div class="form-group">
+                        @Html.LabelFor(model => model.TestimonialToBeAdded.Stars, htmlAttributes: new { @class = "bebas-light mt-3" })
+                        @Html.DropDownListFor(model => model.TestimonialToBeAdded.Stars, new List<SelectListItem>
+                                {
+                                    new SelectListItem {Text = "1", Value = "1" },
+                                    new SelectListItem {Text = "2", Value = "2" },
+                                    new SelectListItem {Text = "3", Value = "3" },
+                                    new SelectListItem {Text = "4", Value = "4" },
+                                    new SelectListItem {Text = "5", Value = "5" , Selected = true},
+                                }, new { @class = "form-control" })
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Display image*</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="displayImg" 
+                        id="DisplayImgInput" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetAddModal()">Cancel</button>
+                <button type="submit" id="add-modal-add-btn" class="btn btn-primary" hidden>Add Testimonial</button>   
+                <button type="submit" id="disabled-add-modal-add-btn" class="btn btn-primary" disabled>Add Testimonial</button>          
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Program Modal -->
+<div class="modal fade" id="update-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Update Testimonial</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetFields()"></button>
+      </div>
+        <form method="post" asp-page-handler="UpdateTestimonial" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="UpdatedTestimonial.Name" for="nameInput" class="bebas-light mt-3">Name</label>
+                    <input asp-for="UpdatedTestimonial.Name" type="text" class="form-control" id="nameInput">
+                    <small id="add-name-hint" class="form-text text-muted">0/25 characters</small>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdatedTestimonial.Description" for="descriptionInput" class="bebas-light mt-3">Description</label>
+                    <textarea asp-for="UpdatedTestimonial.Description" type="text" class="form-control" id="descriptionInput" rows="4"></textarea>
+                    <small id="add-description-hint" class="form-text text-muted">0/200 characters</small>
+                </div> 
+                <div class="form-group">
+                        @Html.LabelFor(model => model.UpdatedTestimonial.Stars, htmlAttributes: new { @class = "bebas-light mt-3" })
+                        @Html.DropDownListFor(model => model.UpdatedTestimonial.Stars, new List<SelectListItem>
+                                {
+                                    new SelectListItem {Text = "1", Value = "1" },
+                                    new SelectListItem {Text = "2", Value = "2" },
+                                    new SelectListItem {Text = "3", Value = "3" },
+                                    new SelectListItem {Text = "4", Value = "4" },
+                                    new SelectListItem {Text = "5", Value = "5" },
+                                }, new { @class = "form-control" })
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Display image</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="imgToBeUpdated" 
+                        id="imgToBeUpdated" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    id="update-modal-close-btn" 
+                    class="btn btn-secondary bebas-light cancel-btn" 
+                    data-bs-dismiss="modal" 
+                    onclick="resetFields()">Cancel</button>
+                <button type="submit" id="update-modal-update-btn" name="testimonialId" class="btn btn-primary">Update Testimonial</button>   
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete Testimonial Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Testimonial</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the testimonial?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteTestimonial" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="testimonialId" class="btn btn-primary">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+@section Scripts
+{
+    <script src="~/js/testimonials.js" asp-append-version="true"></script> 
+}

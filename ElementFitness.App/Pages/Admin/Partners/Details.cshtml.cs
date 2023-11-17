@@ -58,8 +58,6 @@ namespace ElementFitness.App.Pages
             {
                 Partner? partnerToBeUpdated = _partnerService.GetById(id);
                 partnerToBeUpdated = UpdatedPartner.Adapt(partnerToBeUpdated);
-                Log.Error(partnerToBeUpdated.Detail);
-                Log.Error((UpdatedPartner.Detail is null).ToString());
                 FileStream stream = null;
                 string imgLink = "";
                 string file = "";

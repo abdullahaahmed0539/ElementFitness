@@ -21,6 +21,7 @@ namespace ElementFitness.DAL.Data {
         public DbSet<Offer>? Offers  { get; set; }
         public DbSet<Partner>? Partners  { get; set; }
         public DbSet<Program>? Programs  { get; set; }
+        public DbSet<Testimonial>? Testimonials  { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,6 +65,10 @@ namespace ElementFitness.DAL.Data {
             modelBuilder.Entity<Program>()
             .Property(enquiry => enquiry.ProgramID)
             .HasDefaultValueSql("nextval('\"auto_increment\"')");
+
+            //  modelBuilder.Entity<Testimonial>()
+            // .Property(testimonial => testimonial.TestimonialID)
+            // .HasDefaultValueSql("nextval('\"auto_increment\"')");
 
             base.OnModelCreating(modelBuilder);
         }

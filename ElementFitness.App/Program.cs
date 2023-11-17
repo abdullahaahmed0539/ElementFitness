@@ -21,6 +21,7 @@ builder.Services.AddTransient<IEnquiryService, EnquiryService>();
 builder.Services.AddTransient<IJobListingService, JobListingService>();
 builder.Services.AddTransient<IJobApplicantService, JobApplicantService>();
 builder.Services.AddTransient<IMemberAndLeadService, MemberAndLeadService>();
+builder.Services.AddTransient<ITestimonialService, TestimonialService>();
 
 builder.Services.AddTransient<IProgramRepo, ProgramRepo>();
 builder.Services.AddTransient<IOfferRepo, OfferRepo>();
@@ -30,6 +31,7 @@ builder.Services.AddTransient<IEnquiryRepo, EnquiryRepo>();
 builder.Services.AddTransient<IJobListingRepo, JobListingRepo>();
 builder.Services.AddTransient<IJobApplicantRepo, JobApplicantRepo>();
 builder.Services.AddTransient<IMemberAndLeadRepo, MemberAndLeadRepo>();
+builder.Services.AddTransient<ITestimonialRepo, TestimonialRepo>();
 
 
 
@@ -95,6 +97,12 @@ TypeAdapterConfig<ElementFitness.Models.JobApplicant, ElementFitness.Models.JobA
 TypeAdapterConfig<ElementFitness.Models.Contact, ElementFitness.Models.Contact>
     .NewConfig()
     .IgnoreIf((src, dest) => src.ContactID == 0, dest => dest.ContactID)
+    .IgnoreNullValues(true);
+
+
+TypeAdapterConfig<ElementFitness.Models.Testimonial, ElementFitness.Models.Testimonial>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.TestimonialID == 0, dest => dest.TestimonialID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();
