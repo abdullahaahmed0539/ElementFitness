@@ -20,6 +20,7 @@ builder.Services.AddTransient<IPartnerService, PartnerService>();
 builder.Services.AddTransient<IEnquiryService, EnquiryService>();
 builder.Services.AddTransient<IJobListingService, JobListingService>();
 builder.Services.AddTransient<IJobApplicantService, JobApplicantService>();
+builder.Services.AddTransient<IMemberAndLeadService, MemberAndLeadService>();
 
 builder.Services.AddTransient<IProgramRepo, ProgramRepo>();
 builder.Services.AddTransient<IOfferRepo, OfferRepo>();
@@ -28,6 +29,7 @@ builder.Services.AddTransient<IPartnerRepo, PartnerRepo>();
 builder.Services.AddTransient<IEnquiryRepo, EnquiryRepo>();
 builder.Services.AddTransient<IJobListingRepo, JobListingRepo>();
 builder.Services.AddTransient<IJobApplicantRepo, JobApplicantRepo>();
+builder.Services.AddTransient<IMemberAndLeadRepo, MemberAndLeadRepo>();
 
 
 
@@ -80,13 +82,19 @@ TypeAdapterConfig<ElementFitness.Models.Enquiry, ElementFitness.Models.Enquiry>
 TypeAdapterConfig<ElementFitness.Models.Job, ElementFitness.Models.Job>
     .NewConfig()
     .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
-    .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
+    // .IgnoreIf((src, dest) => src.JobID == 0, dest => dest.JobID)
     .IgnoreNullValues(true);
 
 TypeAdapterConfig<ElementFitness.Models.JobApplicant, ElementFitness.Models.JobApplicant>
     .NewConfig()
     .IgnoreIf((src, dest) => src.JobApplicantID == 0, dest => dest.JobApplicantID)
-    .IgnoreIf((src, dest) => src.JobApplicantID == 0, dest => dest.JobApplicantID)
+    // .IgnoreIf((src, dest) => src.JobApplicantID == 0, dest => dest.JobApplicantID)
+    .IgnoreNullValues(true);
+
+
+TypeAdapterConfig<ElementFitness.Models.Contact, ElementFitness.Models.Contact>
+    .NewConfig()
+    .IgnoreIf((src, dest) => src.ContactID == 0, dest => dest.ContactID)
     .IgnoreNullValues(true);
 
 var app = builder.Build();

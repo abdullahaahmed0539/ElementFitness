@@ -1,0 +1,26 @@
+﻿.delete-icon {
+    color: white;
+    background-color: #e51440;
+}
+
+.delete-icon:hover {
+    color: white;
+    background-color:#b7072d;
+    cursor: pointer;
+}
+
+.convert-icon:hover{
+    color: rgb(243, 228, 228);
+    cursor: pointer;
+}
+
+.edit-icon:hover{
+    color: rgb(243, 228, 228);
+    cursor: pointer;
+}
+
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}

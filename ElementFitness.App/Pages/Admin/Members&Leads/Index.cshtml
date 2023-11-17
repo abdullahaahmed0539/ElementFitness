@@ -1,0 +1,310 @@
+﻿@page
+@model MembersAndLeadsAdminViewModel
+@{
+    ViewData["Title"] = "Admin Portal - Members And Leads";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Members & Leads</h1>
+    </div>    
+    <div class="mt-3 offset-1 col-5 offset-sm-3 col-sm-3 offset-md-0 col-md-3 col-lg-2">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">Add contact</button>
+    </div>
+</div>
+
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+@if (Model!.Members?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="bebas-light">Members</h3>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="table-responsive">
+        <table class="table" id="memberTable">
+            <thead>
+                <tr class="table-dark">
+                    <th class="table-dark" scope="col">#</th>
+                    <th class="table-dark" scope="col">First Name</th>
+                    <th class="table-dark" scope="col">Last Name</th>
+                    <th class="table-dark" scope="col">Email</th>
+                    <th class="table-dark" scope="col">Phone Number</th>
+                    <th class="table-dark" scope="col">Profession</th>
+                    <th class="table-dark" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(int i = 0; i<Model.Members.Count(); i++)
+                {
+                    <tr class="table-dark">
+                        <th class="table-dark" scope="row">@(i+1)</th>
+                        <td class="table-dark">@Model.Members.ElementAt(i).FirstName</td>
+                        <td class="table-dark">@Model.Members.ElementAt(i).LastName</td>
+                        <td class="table-dark">@Model.Members.ElementAt(i).Email</td>
+                        <td class="table-dark">@Model.Members.ElementAt(i).MobileNumber</td>
+                        <td class="table-dark">@Model.Members.ElementAt(i).Profession</td>
+                        <td class="table-dark">
+                            <span class="material-symbols-outlined edit-icon" onclick="setFields('@Model.Members.ElementAt(i).FirstName', '@Model.Members.ElementAt(i).LastName','@Model.Members.ElementAt(i).Email', '@Model.Members.ElementAt(i).MobileNumber', '@Model.Members.ElementAt(i).Profession', '@Model.Members.ElementAt(i).ContactID', '@Model.Members.ElementAt(i).ContactType')" data-bs-toggle="modal" data-bs-target="#edit-modal">edit</span>
+                            <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@Model.Members.ElementAt(i).ContactID')"  data-bs-toggle="modal" data-bs-target="#delete-modal" data-toggle="tooltip" data-placement="top" title="Delete">delete</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-3 mt-md-1">
+        <div class="col-12">
+            <h3 class="bebas-light mt-3">Members</h3>
+            <p class="normal-text mt-1">There are no member.</p>
+        </div>
+    </div>
+}
+
+
+
+@if (Model!.Leads?.Count() > 0)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="bebas-light">Leads</h3>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="table-dark">
+                    <th class="table-dark" scope="col">#</th>
+                    <th class="table-dark" scope="col">First Name</th>
+                    <th class="table-dark" scope="col">Last Name</th>
+                    <th class="table-dark" scope="col">Email</th>
+                    <th class="table-dark" scope="col">Phone Number</th>
+                    <th class="table-dark" scope="col">Profession</th>
+                    <th class="table-dark" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(int i = 0; i<Model.Leads.Count(); i++)
+                {
+                    <tr class="table-dark">
+                        <th class="table-dark" scope="row">@(i+1)</th>
+                        <td class="table-dark">@Model.Leads.ElementAt(i).FirstName</td>
+                        <td class="table-dark">@Model.Leads.ElementAt(i).LastName</td>
+                        <td class="table-dark">@Model.Leads.ElementAt(i).Email</td>
+                        <td class="table-dark">@Model.Leads.ElementAt(i).MobileNumber</td>
+                        <td class="table-dark">@Model.Leads.ElementAt(i).Profession</td>
+                        <td class="table-dark">
+                            <span class="material-symbols-outlined convert-icon" onclick="setOnConvertParamValue('@Model.Leads.ElementAt(i).ContactID')" data-bs-toggle="modal" data-bs-target="#convert-modal" data-toggle="tooltip" data-placement="top" title="Convert lead to member">person_add</span>
+                            <span class="material-symbols-outlined edit-icon" onclick="setFields('@Model.Leads.ElementAt(i).FirstName', '@Model.Leads.ElementAt(i).LastName','@Model.Leads.ElementAt(i).Email', '@Model.Leads.ElementAt(i).MobileNumber', '@Model.Leads.ElementAt(i).Profession', '@Model.Leads.ElementAt(i).ContactID', '@Model.Leads.ElementAt(i).ContactType')" data-bs-toggle="modal" data-bs-target="#edit-modal">edit</span>
+                            <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@Model.Leads.ElementAt(i).ContactID')"  data-bs-toggle="modal" data-bs-target="#delete-modal" data-toggle="tooltip" data-placement="top" title="Delete">delete</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-3 mt-md-1">
+        <div class="col-12">
+            <h3 class="bebas-light mt-3">Leads</h3>
+            <p class="normal-text mt-1">There are no leads.</p>
+        </div>
+    </div>
+}
+
+<!-- Delete contact Modal -->
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Delete Job Listing</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the contact?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="DeleteContact" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-delete-btn" name="contactId" class="btn btn-primary">Delete</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- convert contact Modal -->
+<div class="modal fade" id="convert-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Convert Lead to Member</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to convert the lead into a member?</p>
+      </div>
+      <div class="modal-footer">
+        <form asp-page-handler="ConvertContact" method="post" >        
+            <button type="button" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" id="modal-convert-btn" name="contactId" class="btn btn-primary">Convert</button>             
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Add job Modal -->
+<div class="modal fade" id="add-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Add Contact</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetAddModal()"></button>
+      </div>
+        <form method="post" asp-page-handler="onPost" enctype="multipart/form-data">
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeAdded.FirstName" for="firstNameInput" class="bebas-light mt-3">First Name*</label> 
+                    <input asp-for="ContactToBeAdded.FirstName" type="text" class="form-control" id="firstNameInput" maxlength="50"> 
+                    <small id="add-firstname-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeAdded.LastName" for="lastNameInput" class="bebas-light mt-3">Last Name*</label> 
+                    <input asp-for="ContactToBeAdded.LastName" type="text" class="form-control" id="lastNameInput" maxlength="50"> 
+                    <small id="add-lastname-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeAdded.Email" for="emailInput" class="bebas-light mt-3">Email</label> 
+                    <input asp-for="ContactToBeAdded.Email" type="text" class="form-control" id="emailInput"> 
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeAdded.MobileNumber" for="phoneNumberInput" class="bebas-light mt-3">Phone Number</label> 
+                    <input asp-for="ContactToBeAdded.MobileNumber" type="text" class="form-control" id="phoneNumberInput"> 
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeAdded.Profession" for="professionInput" class="bebas-light mt-3">Profession</label> 
+                    <input asp-for="ContactToBeAdded.Profession" type="text" class="form-control" id="professionInput" maxlength="50"> 
+                    <small id="add-profession-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                        @Html.LabelFor(model => model.ContactToBeAdded.ContactType, htmlAttributes: new { @class = "bebas-light mt-3" })
+                        @Html.DropDownListFor(model => model.ContactToBeAdded.ContactType, new List<SelectListItem>
+                                {
+                                    new SelectListItem {Text = "Member", Value = "Member", Selected = true },
+                                    new SelectListItem {Text = "Lead", Value = "Lead" },
+                                }, new { @class = "form-control" })
+                    <br>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetAddModal()">Cancel</button>
+                <button type="submit" id="add-modal-add-btn" class="btn btn-primary" hidden>Add Contact</button>   
+                <button type="submit" id="disabled-add-modal-add-btn" class="btn btn-primary" disabled>Add Contact</button>          
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- edit job Modal -->
+<div class="modal fade" id="edit-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">Edit Contact</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="resetModal()"></button>
+      </div>
+        <form method="post" asp-page-handler="UpdateContact" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="ContactToBeUpdated.FirstName" for="FirstNameInput" class="bebas-light mt-3">First Name*</label> 
+                    <input asp-for="ContactToBeUpdated.FirstName" type="text" class="form-control" id="FirstNameInput" maxlength="50"> 
+                    <small id="updated-firstname-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeUpdated.LastName" for="LastNameInput" class="bebas-light mt-3">Last Name*</label> 
+                    <input asp-for="ContactToBeUpdated.LastName" type="text" class="form-control" id="LastNameInput" maxlength="50"> 
+                    <small id="updated-lastname-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeUpdated.Email" for="EmailInput" class="bebas-light mt-3">Email</label> 
+                    <input asp-for="ContactToBeUpdated.Email" type="text" class="form-control" id="EmailInput"> 
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeUpdated.MobileNumber" for="PhoneNumberInput" class="bebas-light mt-3">Phone Number</label> 
+                    <input asp-for="ContactToBeUpdated.MobileNumber" type="text" class="form-control" id="PhoneNumberInput"> 
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ContactToBeUpdated.Profession" for="ProfessionInput" class="bebas-light mt-3">Profession</label> 
+                    <input asp-for="ContactToBeUpdated.Profession" type="text" class="form-control" id="ProfessionInput" maxlength="50"> 
+                    <small id="updated-profession-hint" class="form-text text-muted">0/50 characters</small>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                        @Html.LabelFor(model => model.ContactToBeUpdated.ContactType, htmlAttributes: new { @class = "bebas-light mt-3" })
+                        @Html.DropDownListFor(model => model.ContactToBeUpdated.ContactType, new List<SelectListItem>
+                                {
+                                    new SelectListItem {Text = "Member", Value = "Member", Selected = true },
+                                    new SelectListItem {Text = "Lead", Value = "Lead" },
+                                }, new { @class = "form-control" })
+                    <br>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="update-modal-close-btn" class="btn btn-secondary bebas-light cancel-btn" data-bs-dismiss="modal" onclick="resetModal()">Cancel</button>
+                <button type="submit" id="update-modal-add-btn" name="contactId" class="btn btn-primary">Update Contact</button>   
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+@Html.AntiForgeryToken()
+@section Scripts
+{
+    <script src="~/js/members&leads.js" asp-append-version="true"></script> 
+}

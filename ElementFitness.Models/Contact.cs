@@ -13,18 +13,17 @@ namespace ElementFitness.Models {
 
         [Required]
         [Column("First_Name")]
+        [StringLength(50)]
         public string? FirstName { get; set; }
 
-        [Required]
         [Column("Last_Name")]
+        [StringLength(50)]
         public string? LastName { get; set; } 
-
-        [Required]
+ 
         [Column("Email")]
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; } 
 
-        [Required]
         [Column("Mobile_Number")]
         [DataType(DataType.PhoneNumber)]
         public string? MobileNumber { get; set; } 
@@ -34,6 +33,7 @@ namespace ElementFitness.Models {
 
         [Required]
         [Column("Contact_Type")]
+        [Display(Name ="Contact Type")]
         public string? ContactType { get; set; } 
 
         [Required]
