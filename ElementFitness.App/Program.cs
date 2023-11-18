@@ -41,7 +41,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseNpgsql(AppSettings.PostGresConnectionString, b => b.MigrationsAssembly("ElementFitness.App"));
 });
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 // builder.Host.UseSerilog();
 IConfiguration configuration = builder.Configuration;

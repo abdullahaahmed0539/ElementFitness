@@ -1,0 +1,5 @@
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}
