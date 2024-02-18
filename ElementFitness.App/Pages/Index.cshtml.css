@@ -2,27 +2,27 @@
     position: relative;
 }
 
-.img-container img {
-    display: block;
-}
+    .img-container img {
+        display: block;
+    }
 
-.img-container .label {
-    position: absolute; 
-    color: white;
-    background-color: black;
-    width: 100%;
-    bottom: 0px; 
-    opacity: 0.85;
-}
+    .img-container .label {
+        position: absolute;
+        color: white;
+        background-color: black;
+        width: 100%;
+        bottom: 0px;
+        opacity: 0.85;
+    }
 
 /*small screens*/
-@media(max-width: 767px){
-    #white-div{
+@media(max-width: 767px) {
+    #white-div {
         background-color: white;
         padding: 20px;
     }
 
-    #black-div{
+    #black-div {
         background-color: black;
         padding: 10px;
     }
@@ -31,20 +31,19 @@
         height: 40%;
     }
 
-    #bmi-calculator{
+    #bmi-calculator {
         padding: 30px 10px;
     }
-    
 }
 
 /*large screens*/
-@media(min-width: 768px){
-    #white-div{
+@media(min-width: 768px) {
+    #white-div {
         background-color: white;
         padding: 50px;
     }
 
-    #black-div{
+    #black-div {
         background-color: black;
         padding: 50px;
     }
@@ -52,45 +51,137 @@
     .img-container .label {
         height: 40%;
     }
-    
-    #bmi-calculator{
+
+    #bmi-calculator {
         padding: 30px 70px;
     }
 }
 
-.card-heading{
+.card-heading {
     text-align: center;
 }
 
 
 
-#testimonial-link{
+#testimonial-link {
     text-decoration: none;
 }
 
-#bmi-calculator{
+#bmi-calculator {
     background-color: white;
     padding: 30px 70px;
 }
 
-#bmi-table .left-col{
+#bmi-table .left-col {
     border-left: none;
 }
 
-#bmi-table .right-col{
+#bmi-table .right-col {
     border-right: none;
 }
 
-#bmi-result{
+#bmi-result {
     background-color: black;
-    padding: 20px;
+    padding: 15px;
 }
 
-#bmi-result-msg{
-    padding-bottom: 0px;
+#bmi-result-msg {
+    font-family: Bebas Neue;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+    color:white;
+}
+.bmiresultdesc
+{
+    position: relative;
+    top: 4px;
+}
+.bebas-dark {
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 60px;
+    letter-spacing: 0em;
 }
 
-#contact-block{
+#IndexContactUsBtn {
+    width: 199.57px;
+    height: 58.72px;
+}
+
+#IndexContactUsBtnSpan {
+    font-size: 36px;
+    position: relative;
+    top: 3px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+}
+
+#bmiDescription {
+    width: 550px;
+}
+
+.bmimappertitle {
+    position: relative;
+    right: 1.5rem;
+    font-size: 36px;
+}
+
+.bmimappertitledesc {
+    position: relative;
+    right: 0.5rem;
+}
+
+#bmi-table {
+    width: 430px;
+}
+
+#bmi-calculator-btn {
+    width: 163px;
+    height: 44.23px;
+    font-family: Bebas Neue;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0em;
+}
+
+.bmimapper {
+    position: relative;
+    left: 2.5rem;
+    font-size: 36px;
+}
+
+.bmimapperdesc {
+    position: relative;
+    left: 5rem;
+}
+
+.bebas-grey {
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+}
+#bmi-result-msg-2 {
+    position: relative;
+    left: 13rem;
+}
+.custombmicss {
+    font-size: 27px !important;
+    font-weight: 400 !important;
+    line-height: 39px !important;
+    letter-spacing: 0em !important;
+}
+.bmiresultcss
+{
+    position: absolute;
+    right: -6px;
+}
+#contact-block {
     background-color: #E5E5E5;
     padding: 50px;
 }

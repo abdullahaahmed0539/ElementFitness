@@ -16,19 +16,19 @@ const calculateBMI = () => {
     if (BMI < 18.5) {
         $("#bmi-result").attr('hidden',false);
         $("#bmi-result-msg").text("Looks like you are underweight!");
-        $("#bmi-result-msg").attr('style', 'color: yellow');
+        $("#bmi-result-msg").attr('style', 'color: white');
     } else if (BMI >= 18.5 && BMI < 24.9) {
         $("#bmi-result").attr("hidden", false);
         $("#bmi-result-msg").text("Congrats, You are healthy!");
-        $("#bmi-result-msg").attr("style", "color: #77dd77");
+        $("#bmi-result-msg").attr("style", "color: white");
     } else if (BMI >= 25 && BMI < 29.9) {
         $("#bmi-result").attr("hidden", false);
         $("#bmi-result-msg").text("Looks like you are overweight!");
-        $("#bmi-result-msg").attr("style", "color: yellow");
+        $("#bmi-result-msg").attr("style", "color: white");
     } else {
         $("#bmi-result").attr("hidden", false);
         $("#bmi-result-msg").text("Looks like you are Obese!");
-        $("#bmi-result-msg").attr("style", "color: red");
+        $("#bmi-result-msg").attr("style", "color: white");
     }
     $("#bmi-result-msg-2").text(`Your BMI is ${BMI.toFixed(1)}`);
     

@@ -96,22 +96,22 @@
     <div class="row mb-3">
         <div class="col-12 col-md-6">
             <div class="row">
-                <p class="normal-grey">A BMI calculator is a tool that uses a person's weight and height to estimate their body fat and determine whether they are underweight, normal weight, overweight, or obese.</p>
+                <p class="normal-grey" id="bmiDescription">A BMI calculator is a tool that uses a person's weight and height to estimate their body fat and determine whether they are underweight, normal weight, overweight, or obese.</p>
             </div>
             <div class="row" >
                 <div class="col-5">
-                    <input class="form-control bebas-grey" id="bmi-calculator-height" type="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="HEIGHT / CM"/>
+                    <input class="form-control bebas-grey custombmicss" id="bmi-calculator-height" type="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="HEIGHT / CM"/>
                 </div>
                 <div class="col-5">
-                    <input class="form-control bebas-grey" id="bmi-calculator-weight" type="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="WEIGHT / KG"/>
+                    <input class="form-control bebas-grey custombmicss" id="bmi-calculator-weight" type="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="WEIGHT / KG"/>
                 </div>
             </div>
             <div class="row  mt-3">
                 <div class="col-5">
-                    <input class="form-control bebas-grey" id="bmi-calculator-age" type="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="AGE"/>
+                    <input class="form-control bebas-grey custombmicss" id="bmi-calculator-age" type="number" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="AGE"/>
                 </div>
                 <div class="col-5">
-                    <select class="form-select bebas-grey" aria-label="Default select example" id="bmi-calculator-gender">
+                    <select class="form-select bebas-grey custombmicss" aria-label="Default select example" id="bmi-calculator-gender">
                         <option selected disabled style="color: rgb(111, 111, 111);" hidden>Gender</option>
                         <option value="male" class="bebas-dark">Male</option>
                         <option value="female">Female</option>
@@ -121,7 +121,7 @@
             <div class="row" id="fill-msg" style="color:#e51440" hidden>Please fill out all fields</div>
             <div class="row mt-4">
                 <div class="col-2 col-md-2">
-                    <button class="btn btn-primary" onclick="calculateBMI()">Calculate</button>
+                    <button id="bmi-calculator-btn" class="btn btn-primary" onclick="calculateBMI()">Calculate</button>
                 </div>
             </div>
         </div>
@@ -129,39 +129,39 @@
             <table class="table table-bordered" id="bmi-table">
                 <thead>
                     <tr style="border-top: hidden;">
-                        <th class="bebas-dark text-end left-col">BMI</th>
-                        <th class="bebas-dark right-col">Weight Status</th>
+                        <th class="bebas-dark text-end left-col bmimappertitle">BMI</th>
+                        <th class="bebas-dark right-col bmimapper">Weight Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="normal-dark left-col" align='right'>Below 18.5</td>
-                        <td class="normal-dark right-col">underweight</td>
+                        <td class="normal-dark left-col bmimappertitledesc" align='right'>Below 18.5</td>
+                        <td class="normal-dark right-col bmimapperdesc">Underweight</td>
                     </tr>
                     <tr>
-                        <td class="normal-dark left-col" align='right'>18.5 - 24.9</td>
-                        <td class="normal-dark right-col">Healthy</td>
+                        <td class="normal-dark left-col bmimappertitledesc" align='right'>18.5 - 24.9</td>
+                        <td class="normal-dark right-col bmimapperdesc">Healthy</td>
                     </tr>
                      <tr>
-                        <td class="normal-dark left-col" align='right'>25.0 - 29.9  </td>
-                        <td class="normal-dark right-col">Overweight</td>
+                        <td class="normal-dark left-col bmimappertitledesc" align='right'>25.0 - 29.9  </td>
+                        <td class="normal-dark right-col bmimapperdesc">Overweight</td>
                     </tr>
                     <tr style="border-bottom: hidden;">
-                        <td class="normal-dark left-col" align='right'>30.0+</td>
-                        <td class="normal-dark right-col">Obese</td>
+                        <td class="normal-dark left-col bmimappertitledesc" align='right'>30.0+</td>
+                        <td class="normal-dark right-col bmimapperdesc">Obese</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row mt-4" id="bmi-result" hidden>
-        <div class="col-1">
+        <div class="col-1 bmiresultcss">
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="removeResult()"></button>
         </div>
-        <div class="col-11 col-md-9">
+        <div class="col-11 col-md-9 bmiresultdesc">
             <h2 id="bmi-result-msg" class="bebas-light"></h2>
         </div>
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-2 bmiresultdesc">
             <p id="bmi-result-msg-2" class="normal-text"></p>
         </div>
         
@@ -171,7 +171,7 @@
 <section id="contact-block" class="row">
     <h1 class="bebas-dark" style="text-align: center;">Interested in becoming a member?</h1>
     <h3 class="bebas-grey" style="text-align: center;">Let's Go</h3>
-    <div class="text-center"><a href="/Contact" class="btn btn-primary" >Contact Us</a></div>
+    <div class="text-center"><a href="/Contact" id="IndexContactUsBtn" class="btn btn-primary" ><span id="IndexContactUsBtnSpan">Contact Us</span></a></div>
 </section>
 
  
