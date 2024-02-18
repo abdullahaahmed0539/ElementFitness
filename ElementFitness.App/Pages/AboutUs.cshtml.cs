@@ -1,5 +1,6 @@
 ﻿using ElementFitness.BL.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Serilog;
 
 namespace ElementFitness.App.Pages
 {
@@ -44,7 +45,7 @@ namespace ElementFitness.App.Pages
             }
             catch(Exception ex)
             {
-
+                Log.Error(ex.Message);
             }
         }
     }
