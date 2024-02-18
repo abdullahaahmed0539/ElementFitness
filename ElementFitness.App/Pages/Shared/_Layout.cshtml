@@ -57,11 +57,11 @@
                                 <img src="~/img/insta-icon.png" alt="Logo image">
                             </a>
                         </li>
-                        <li class="nav-item d-none d-md-block d-lg-block d-xl-block">
+                       @* <li class="nav-item d-none d-md-block d-lg-block d-xl-block">
                             <a class="nav-link text-light bebas-light">
                                 <img src="~/img/whatsapp-icon.png"  alt="Logo image">
                             </a>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </div>
@@ -71,28 +71,28 @@
             @RenderBody()
         </main>
 
-    <footer class="border-top mt-4 footer text-muted row">
+    <footer class="border-top mt0 footer text-muted row">
         <div class="container mt-4 mb-4">
-            <div class="row">
+            <div class="row" id="footer-custom">
                 <div class="offset-md-4 col-md-1 ms-auto">
-                    <img src="~/img/Logo.png" width="55" height="50" alt="Logo image">
+                    <img src="~/img/Logo.png" width="96" height="85.6" alt="Logo image">
                 </div>
                 <div class="col-md-2">
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Home">Home</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/AboutUs">About Us</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Trainers">Trainers</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Memberships">Memberships</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Partners">Partners</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Testimonials">Testimonials</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Careers">Careers</a></div>
-                    <div class="row"><a class="bebas-dark col-12" asp-page="/Contact">Contact</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Home">Home</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/AboutUs">About Us</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Trainers">Trainers</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Memberships">Memberships</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Partners">Partners</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Testimonials">Testimonials</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Careers">Careers</a></div>
+                    <div class="row"><a class="bebas-dark col-12" style="text-decoration:none;" asp-page="/Contact">Contact</a></div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <h3 class="bebas-dark">Membership Enquiries</h3>
                     </div>
                     <div class="row">
-                        <p class="normal-dark">info@elementfitness.pk</p>
+                        <p class="normal-dark" id="infoElement">info@elementfitness.pk</p>
                     </div>
                     
                         <a href="https://www.facebook.com/ElementFitness">
@@ -101,12 +101,12 @@
                         <a  href="https://www.instagram.com/elementfitness.pk/">
                             <img src="~/img/instab-icon.png" width="30" height="30" alt="Logo image">
                         </a>
-                        <a href="">
+                       @* <a href="">
                             <img src="~/img/whatsappb-icon.png" width="30" height="30" alt="Logo image">
                         </a>
                         <a href="">
                             <img src="~/img/linkedinb-icon.png" width="30" height="30" alt="Logo image">
-                        </a>
+                        </a>*@
                     
                 </div>
             </div>
