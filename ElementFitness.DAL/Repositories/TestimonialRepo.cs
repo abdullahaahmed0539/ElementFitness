@@ -25,6 +25,11 @@ namespace ElementFitness.DAL.Repositories
             return _dbContext.Testimonials?.FirstOrDefault(predicate);;
         }
 
+        public IEnumerable<Testimonial>? GetNRecords(int n)
+        {
+            return _dbContext.Testimonials?.OrderByDescending(p => p.CreatedOn).Take(n).ToList();
+        }
+
         public async Task<Testimonial>? AddAsync(Testimonial newInstance)
         {
             if(newInstance == null)

@@ -28,6 +28,7 @@ namespace ElementFitness.App.Pages
         {
             try
             {
+                return RedirectToPage("../PromoVideo"); //remove if you want to enable job detail page
                 JobApplication = _jobApplicantService.GetById(id);
                 if (JobApplication == null)
                     throw new DatabaseException($"No job application with Id={id} exists.");

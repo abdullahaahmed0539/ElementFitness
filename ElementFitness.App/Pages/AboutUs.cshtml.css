@@ -1,0 +1,8 @@
+.section-spacing {
+  margin-top: 70px !important;
+}
+
+#contact-block, #testimony-block{
+    background-color: #E5E5E5;
+    padding: 50px;
+}

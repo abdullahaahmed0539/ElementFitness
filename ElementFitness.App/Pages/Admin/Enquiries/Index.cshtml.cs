@@ -27,6 +27,7 @@ namespace ElementFitness.App.Pages
         {
             try
             {
+                return RedirectToPage("../PromoVideo"); //remove if you want to enable enquiry page
                 IEnumerable<Enquiry>? enquiries = _enquiryService.GetAll();
                 UnreadEnquiries = enquiries.Where(e => e.Read == false);
                 UnrespondedEnquiries = enquiries.Where(e => e.Read == true && e.Resolved == false);
