@@ -4,14 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ElementFitness.App.Pages
 {
-    [Authorize("Administrator")]
-    public class PrivacyModel : PageModel
+    public class TestimonialModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public TestimonialModel()
         {
-            _logger = logger;
         }
 
         public void OnGet()

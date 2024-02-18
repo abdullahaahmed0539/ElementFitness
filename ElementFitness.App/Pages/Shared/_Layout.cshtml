@@ -10,43 +10,114 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ElementFitness.App.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="dark-theme">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ElementFitness</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/img/Logo.png" width="55" height="50" alt="Logo image">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
+                    <ul class="navbar-nav ms-auto">
+                        <li id="home-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light "  asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Privacy">Privacy</a>
+                        <li id="about-us-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/AboutUs">About</a>
+                        </li>
+                        <li id="trainers-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/Trainers">Trainers</a>
+                        </li>
+                        <li id="memberships-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/Memberships">Memberships</a>
+                        </li>
+                        <li id="partners-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/Partners">Partners</a>
+                        </li>
+                        <li id="testimonials-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/Testimonials">Testimonials</a>
+                        </li>
+                         <li id="careers-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/Careers">Careers</a>
+                        </li>
+                        <li id="contact-link" class="nav-item">
+                            <a class="nav-link text-light bebas-light"  asp-page="/Contact">Contact</a>
+                        </li>
+                        <li class="nav-item d-none d-md-block d-lg-block d-xl-block">
+                            <a class="nav-link text-light bebas-light" href="https://www.facebook.com/ElementFitness">
+                                <img src="~/img/facebook-icon.png"  alt="Logo image">
+                            </a>
+                        </li>
+                         <li class="nav-item d-none d-md-block d-lg-block d-xl-block">
+                            <a class="nav-link text-light bebas-light" href="https://www.instagram.com/elementfitness.pk/">
+                                <img src="~/img/insta-icon.png" alt="Logo image">
+                            </a>
+                        </li>
+                        <li class="nav-item d-none d-md-block d-lg-block d-xl-block">
+                            <a class="nav-link text-light bebas-light">
+                                <img src="~/img/whatsapp-icon.png"  alt="Logo image">
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main container-fluid" class="pb-3">
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - ElementFitness.App - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="border-top mt-4 footer text-muted row">
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="offset-md-4 col-md-1 ms-auto">
+                    <img src="~/img/Logo.png" width="55" height="50" alt="Logo image">
+                </div>
+                <div class="col-md-2">
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Home">Home</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/AboutUs">About Us</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Trainers">Trainers</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Memberships">Memberships</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Partners">Partners</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Testimonials">Testimonials</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Careers">Careers</a></div>
+                    <div class="row"><a class="bebas-dark col-12" asp-page="/Contact">Contact</a></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <h3 class="bebas-dark">Membership Enquiries</h3>
+                    </div>
+                    <div class="row">
+                        <p class="normal-dark">info@elementfitness.pk</p>
+                    </div>
+                    
+                        <a href="https://www.facebook.com/ElementFitness">
+                            <img src="~/img/facebookb-icon.png" width="30" height="30" alt="Logo image"></img>
+                        </a>
+                        <a  href="https://www.instagram.com/elementfitness.pk/">
+                            <img src="~/img/instab-icon.png" width="30" height="30" alt="Logo image">
+                        </a>
+                        <a href="">
+                            <img src="~/img/whatsappb-icon.png" width="30" height="30" alt="Logo image">
+                        </a>
+                        <a href="">
+                            <img src="~/img/linkedinb-icon.png" width="30" height="30" alt="Logo image">
+                        </a>
+                    
+                </div>
+            </div>
+            
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/layout.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

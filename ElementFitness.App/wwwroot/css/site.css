@@ -13,10 +13,29 @@ html {
   color: white;
 }
 
+.bebas-dark {
+  font-family: "Bebas Neue", sans-serif;
+  color: black;
+}
+
+.bebas-grey {
+  font-family: "Bebas Neue", sans-serif;
+  color: rgb(111, 111, 111);
+}
 
 .normal-text{
   font-size: 16px;
   color: white;
+}
+
+.normal-dark{
+  font-size: 16px;
+  color: black;
+}
+
+.normal-grey{
+  font-size: 16px;
+  color: rgb(111, 111, 111);
 }
 
 

@@ -1,0 +1,96 @@
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    display: block;
+}
+
+.img-container .label {
+    position: absolute; 
+    color: white;
+    background-color: black;
+    width: 100%;
+    bottom: 0px; 
+    opacity: 0.85;
+}
+
+/*small screens*/
+@media(max-width: 767px){
+    #white-div{
+        background-color: white;
+        padding: 20px;
+    }
+
+    #black-div{
+        background-color: black;
+        padding: 10px;
+    }
+
+    .img-container .label {
+        height: 40%;
+    }
+
+    #bmi-calculator{
+        padding: 30px 10px;
+    }
+    
+}
+
+/*large screens*/
+@media(min-width: 768px){
+    #white-div{
+        background-color: white;
+        padding: 50px;
+    }
+
+    #black-div{
+        background-color: black;
+        padding: 50px;
+    }
+
+    .img-container .label {
+        height: 40%;
+    }
+    
+    #bmi-calculator{
+        padding: 30px 70px;
+    }
+}
+
+.card-heading{
+    text-align: center;
+}
+
+
+
+#testimonial-link{
+    text-decoration: none;
+}
+
+#bmi-calculator{
+    background-color: white;
+    padding: 30px 70px;
+}
+
+#bmi-table .left-col{
+    border-left: none;
+}
+
+#bmi-table .right-col{
+    border-right: none;
+}
+
+#bmi-result{
+    background-color: black;
+    padding: 20px;
+}
+
+#bmi-result-msg{
+    padding-bottom: 0px;
+}
+
+#contact-block{
+    background-color: #E5E5E5;
+    padding: 50px;
+}

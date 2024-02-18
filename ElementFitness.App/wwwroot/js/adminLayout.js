@@ -18,6 +18,7 @@ $(document).ready(() => {
     else if (page.startsWith("JobApplications")) $("#JobApplications").addClass("active");
     else if (page.startsWith("Members&Leads")) $("#Members").addClass("active");
     else if (page.startsWith("Testimonials")) $("#Testimonials").addClass("active");
+    else if (page.startsWith("Settings")) $("#Settings").addClass("active");
     else $("#PromoVideo").addClass("active");
 })
 

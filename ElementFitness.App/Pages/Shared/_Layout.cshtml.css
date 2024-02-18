@@ -15,8 +15,8 @@ a {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  /* background-color: #1b6ec2;
+  border-color: #1861ac; */
 }
 
 .border-top {
@@ -37,8 +37,29 @@ button.accept-policy {
 
 .footer {
   position: absolute;
+  background-color: #ABABAB;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px;
+}
+
+a{
+  text-decoration: none;
+}
+
+
+
+/*small screens*/
+@media(max-width: 767px){
+  .half-a-border-on-top {
+    border-top: none;
+  } 
+}
+
+/*large screens*/
+@media(min-width: 768px){
+    .half-a-border-on-top {
+  border-top: 2px solid;
+  border-image: linear-gradient(to right, #FFF 50%, transparent 50%) 100% 1;
+}
 }
