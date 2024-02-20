@@ -4,7 +4,7 @@ $(document).ready(() => {
   $("#emailInput").val("");
   $("#mobileNumberInput").val("");
   $("#aboutInput").val("");
-  $("#DisplayImgInput").val(null);
+    $("#DisplayImgInput").val(null);
     
     let msg = $("#error-message").val();
     if (msg.length > 0) {
