@@ -120,24 +120,6 @@
     letter-spacing: 0em;
 }
 
-#bmiDescription {
-    width: 550px;
-}
-
-.bmimappertitle {
-    position: relative;
-    right: 1.5rem;
-    font-size: 36px;
-}
-
-.bmimappertitledesc {
-    position: relative;
-    right: 0.5rem;
-}
-
-#bmi-table {
-    width: 430px;
-}
 
 #bmi-calculator-btn {
     width: 163px;
