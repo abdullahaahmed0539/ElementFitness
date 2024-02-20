@@ -4,12 +4,12 @@ namespace ElementFitness.BL.Interfaces
 {
     public interface ITestimonialService
     {
-        IEnumerable<Testimonial>? GetAll();
-        Testimonial? GetById(int id);
-        Testimonial? GetByName(string offerName);
-        Task<Testimonial>? AddAsync(Testimonial newInstance);
-        Task<bool> UpdateAsync(Testimonial updatedObj);
-        Task<bool> DeleteAsync(int id);
-        IEnumerable<Testimonial>? GetNRecords(int numberOfRecords);
+        public IEnumerable<Testimonial>? GetAll();
+        public Testimonial? GetById(int id);
+        public IEnumerable<Testimonial>? GetNRecords(int n);
+        public Testimonial? GetByName(string offerName);
+        public Task<Testimonial>? AddAsync(Testimonial newInstance);
+        public Task<bool> UpdateAsync(Testimonial updatedObj);
+        public Task<bool> DeleteAsync(int id);
     }
 }

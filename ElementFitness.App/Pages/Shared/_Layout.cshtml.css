@@ -48,16 +48,28 @@ button.accept-policy {
     width: 9.66666667% !important;
 }
 
-#footer-custom {
+/* #footer-custom {
     margin-left: 8rem;
+} */
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
 .footer {
-    background-color: #ABABAB;
-    white-space: nowrap;
+  position: absolute;
+  background-color: #ABABAB;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+
 }
-.customref {
+/* .customref {
     text-decoration: none !important;
-}
+} */
 
 
 
@@ -71,7 +83,7 @@ button.accept-policy {
 /*large screens*/
 @media(min-width: 768px){
     .half-a-border-on-top {
-  border-top: 2px solid;
-  border-image: linear-gradient(to right, #FFF 50%, transparent 50%) 100% 1;
-}
+      border-top: 2px solid;
+      border-image: linear-gradient(to right, #FFF 50%, transparent 50%) 100% 1;
+    }
 }

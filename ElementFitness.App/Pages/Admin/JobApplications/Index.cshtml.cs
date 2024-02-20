@@ -28,6 +28,7 @@ namespace ElementFitness.App.Pages
         {
             try
             {
+                return RedirectToPage("../PromoVideo"); //remove if you want to enable job application page
                 IEnumerable<JobApplicant> jobApplicants = _jobApplicantService.GetAll();
                 UnreadJobApplicants = jobApplicants.Where(j => j.JobID != 0 && j.ApplicationRead == false);
                 ReadJobApplicants = jobApplicants.Where(j => j.JobID != 0 && j.ApplicationRead == true);

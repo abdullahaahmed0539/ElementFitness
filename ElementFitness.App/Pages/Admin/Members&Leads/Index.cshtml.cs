@@ -37,6 +37,7 @@ namespace ElementFitness.App.Pages
         {
             try
             {
+                return RedirectToPage("../PromoVideo"); //remove if you want to enable members page
                 IEnumerable<Contact>? contacts = _mnlService.GetAll();
                 Leads = contacts.Where(c => c.ContactType?.ToLower() == "lead");
                 Members = contacts.Where(c => c.ContactType?.ToLower() == "member");

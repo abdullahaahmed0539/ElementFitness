@@ -29,9 +29,9 @@ namespace ElementFitness.BL.Services
             return _testimonialRepo.GetAll();
         }
 
-        public IEnumerable<Testimonial>? GetNRecords(int numberOfRecords)
+        public IEnumerable<Testimonial>? GetNRecords(int n)
         {
-            return _testimonialRepo.GetAll().Take(numberOfRecords);
+            return _testimonialRepo.GetNRecords(n);
         }
 
         public Testimonial? GetById(int id)

@@ -3,6 +3,33 @@
 @{
     ViewData["Title"] = "Partners";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Partners.</p>
+<section id="partners-block">
+    <div class="container">
+        <div class="row mt-4">
+            <h1 class="bebas-light" style="text-align: center;">Partners</h1>
+        </div>
+        @if(Model.Partners?.Count() > 0)
+        {  
+            <div class="row">
+                @foreach(Models.Partner partner in Model.Partners)
+                {
+                    <span class="col-12 col-md-6 col-lg-4 mt-4 mb-4">
+                        <div class="card" >
+                            <img src="@Url.Content(@partner.ImageLink)" class="card-img-top" alt="@partner.Name image" >
+                            <div class="card-body">
+                                <h5 class="card-title bebas-light row ms-1 overflow-auto mt-3">@partner.Name</h5>
+                                <p class="card-text normal-text">@partner.Detail</p>
+                            </div>
+                        </div>
+                    </span>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="card-text normal-text text-center">There are no partners to show.</p>
+        }
+    </div>
+</section>
+
