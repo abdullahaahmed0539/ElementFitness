@@ -1,0 +1,133 @@
+@page "/Careers/{id:int}/Application"
+@model JobApplicationViewModel
+@{
+    ViewData["Title"] = "Careers";
+}
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+<section id="job-detail-block mb-4">
+    <div class="container">
+        <div class="row">
+            <h1 class="bebas-light text-center">@Model.Job?.JobTitle - application</h1>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="Applicant.FirstName" for="firstNameInput" class="bebas-light mt-3">First Name*</label>
+                    <input asp-for="Applicant.FirstName" type="text" class="form-control" id="firstNameInput">
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Applicant.LastName" for="lastNameInput" class="bebas-light mt-3">Last Name*</label>
+                    <input asp-for="Applicant.LastName" type="text" class="form-control" id="lastNameInput">
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Applicant.Email" for="emailInput" class="bebas-light mt-3">Email*</label>
+                    <input asp-for="Applicant.Email" type="email" class="form-control" id="emailInput">
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Applicant.MobileNumber" for="mobileNumberInput" class="bebas-light mt-3">Mobile Number*</label>
+                    <input asp-for="Applicant.MobileNumber" type="text" class="form-control" id="mobileNumberInput">
+                    <br>
+                </div>     
+                <div class="form-group">
+                    <label asp-for="Applicant.About" for="aboutInput" class="bebas-light mt-3">Tell Us About Yourself*</label>
+                    <textarea name="@Html.NameFor(a => a.Applicant.About)" type="text" class="form-control" id="aboutInput" maxlength="1500" rows="7"></textarea>
+                    <small id="about-hint" class="form-text text-muted">0/1500 characters</small>
+                </div>        
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Resume/CV*</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="resumeUpload" 
+                        id="resumeUpload" 
+                        accept="application/pdf">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="disabled-application-submit-btn"  class="btn btn-primary" disabled>Submit</button>   
+                <button type="submit" id="application-submit-btn"  class="btn btn-primary" hidden>Submit</button>   
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+@section Scripts
+{
+    <script src="~/js/application-submit.js" asp-append-version="true"></script> 
+}
+
+
+
+
+
+
+
+<section id="job-detail-block mb-4">
+    <div class="container">
+        <div class="row">
+            <h1 class="bebas-light text-center">@Model.Job?.JobTitle - application</h1>
+        </div>
+        <form method="post" asp-page-handler="" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label asp-for="Applicant.FirstName" for="firstNameInput" class="bebas-light mt-3">First Name*</label>
+                    <input asp-for="Applicant.FirstName" type="text" class="form-control" id="firstNameInput">
+                    @* <small id="update-name-hint" class="form-text text-muted">@Model.Offer.Name.Length/50 characters</small> *@
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Applicant.LastName" for="lastNameInput" class="bebas-light mt-3">Last Name*</label>
+                    <input asp-for="Applicant.LastName" type="text" class="form-control" id="lastNameInput">
+                    @* <small id="update-name-hint" class="form-text text-muted">@Model.Offer.Name.Length/50 characters</small> *@
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Applicant.Email" for="emailInput" class="bebas-light mt-3">Email*</label>
+                    <input asp-for="Applicant.Email" type="email" class="form-control" id="emailInput">
+                    @* <small id="update-name-hint" class="form-text text-muted">@Model.Offer.Name.Length/50 characters</small> *@
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Applicant.MobileNumber" for="mobileNumberInput" class="bebas-light mt-3">Mobile Number*</label>
+                    <input asp-for="Applicant.MobileNumber" type="text" class="form-control" id="mobileNumberInput">
+                    @* <small id="update-valid-upto-hint" class="form-text text-muted">@Model.Offer.ValidUpto.Length/30 characters</small> *@
+                    <br>
+                </div>     
+                <div class="form-group">
+                    <label asp-for="Applicant.About" for="aboutInput" class="bebas-light mt-3">Tell Us About Yourself</label>
+                    <textarea name="@Html.NameFor(a => a.Applicant.About)" type="text" class="form-control" id="aboutInput" maxlength="400" rows="4"></textarea>
+                    @* <small id="update-description-hint" class="form-text text-muted">@Model.Offer.Description.Length/400 characters</small> *@
+                </div>        
+                <div class="form-group">
+                    <label for="DisplayImgInput" class="bebas-light mt-3">Resume/CV*</label>
+                    <br>
+                    <input 
+                        type="file" 
+                        class="form-control-file" 
+                        name="imgToBeUpdated" 
+                        id="imgToBeUpdated" 
+                        accept="image/*">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    id="update-modal-close-btn" 
+                    class="btn btn-secondary bebas-light cancel-btn" 
+                    data-bs-dismiss="modal" 
+                    @* onclick="resetFields('@Model.Offer.Name', '@Model.Offer.Description', '@Model.Offer.ValidUpto')">Cancel</button> *@
+                <button type="submit" id="update-modal-update-btn"  class="btn btn-primary">Submit</button>   
+            </div>
+        </form>
+    </div>
+</section>

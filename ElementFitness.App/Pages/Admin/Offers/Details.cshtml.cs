@@ -34,6 +34,7 @@ namespace ElementFitness.App.Pages
         {
             try
             {
+                return RedirectToPage("../PromoVideo"); //remove if you want to enable offers page
                 Offer = _offerService.GetById(id);
                 if (Offer == null)
                     throw new DatabaseException($"No offer with Id={id} exists.");

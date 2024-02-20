@@ -3,6 +3,71 @@
 @{
     ViewData["Title"] = "Memberships";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Memberships.</p>
+<section class="mt-2 mt-md-4 row" id="program-block">
+    <div class="container">
+        <h1 class="bebas-light" style="text-align: center;">Memberships</h1>
+        <p class="normal-text" align="center">
+            Embark on a fitness journey like no other with our membership options 
+            tailored to suit your goals.
+        </p>
+       
+       <div class="mt-4">
+            @for(int i = 0; i < Model.Programs?.Count(); i++)
+            {
+                if(i%2 == 0)
+                {
+                    <div class="row ms-2 me-2 mb-3 ">
+                        <img class="d-none d-lg-block col-lg-6 pe-lg-2" src="@Url.Content(@Model.Programs.ElementAt(i).ImageLink)" alt="@Model.Programs.ElementAt(i).Name image">
+                        <div class="col-lg-6 ps-lg-2" style="height: 100%;">
+                            <div class="info-section">
+                                <div class="container">
+                                    <h3 class="row bebas-light">@Model.Programs.ElementAt(i).Name</h3>
+                                    <h4 class="row bebas-light">Program Description</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).Description</p>
+                                    <h4 class="row bebas-light">Day & Timing</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).DayAndTiming</p>
+                                    <h4 class="row bebas-light">Other Details</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).OtherDetails</p>
+                                    <h4 class="row bebas-light">Trainers</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).Trainers</p>
+                                    <h4 class="row bebas-light">Charges</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).Charges</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row ms-2 me-2 mb-3">
+                        <div class="col-lg-6 pe-lg-2">
+                            <div class="info-section ">
+                                <div class="container">
+                                    <h3 class="row bebas-light">@Model.Programs.ElementAt(i).Name</h3>
+                                    <h4 class="row bebas-light">Program Description</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).Description</p>
+                                    <h4 class="row bebas-light">Day & Timing</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).DayAndTiming</p>
+                                    <h4 class="row bebas-light">Other Details</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).OtherDetails</p>
+                                    <h4 class="row bebas-light">Trainers</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).Trainers</p>
+                                    <h4 class="row bebas-light">Charges</h4>
+                                    <p class="row normal-text">@Model.Programs.ElementAt(i).Charges</p>
+                                </div>
+                            </div>
+                        </div>
+                            <img class="col-lg-6 d-none d-lg-block ps-lg-2" src="@Url.Content(@Model.Programs.ElementAt(i).ImageLink)" alt="@Model.Programs.ElementAt(i).Name image">
+                    </div>
+                }
+            }
+        </div>
+    </div>           
+</section>
+
+<section id="contact-block" class="section-spacing row">
+    <h1 class="bebas-dark" style="text-align: center;">Interested in becoming a member?</h1>
+    <h3 class="bebas-grey" style="text-align: center;">Let's Go</h3>
+    <div class="text-center"><a href="/Contact" class="btn btn-primary" >Contact Us</a></div>
+</section>

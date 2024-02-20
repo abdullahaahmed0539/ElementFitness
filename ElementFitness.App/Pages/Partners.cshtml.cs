@@ -8,15 +8,11 @@ namespace ElementFitness.App.Pages
     {
 
         private readonly IPartnerService _partnerService;
-        private readonly IWebHostEnvironment _environment;
-        private readonly string WWWRoot;
         public IEnumerable<Models.Partner>? Partners { get; private set;}
 
 
-        public PartnerModel(IPartnerService partnerService, IWebHostEnvironment environment)
+        public PartnerModel(IPartnerService partnerService)
         {
-            _environment = environment;
-            WWWRoot = _environment.WebRootPath;
             _partnerService = partnerService;
         }
 

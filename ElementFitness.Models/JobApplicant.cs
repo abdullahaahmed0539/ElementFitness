@@ -27,10 +27,12 @@ namespace ElementFitness.Models {
         [Required]
         [Column("Mobile_Number")]
         [DataType(DataType.PhoneNumber)]
+        [StringLength(maximumLength: 30)]
         public string? MobileNumber { get; set; } 
 
         [Required]
         [Column("About")]
+        [StringLength(maximumLength:1500)]
         public string? About { get; set; }
 
 

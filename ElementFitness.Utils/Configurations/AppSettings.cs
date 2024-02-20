@@ -52,6 +52,46 @@ namespace ElementFitness.Utils.Configurations
             }
         }
 
+
+        public static string MailjetPublicKey
+        {
+            get
+            {
+                if (Configuration["Mailjet:PublicKey"] == null || string.IsNullOrWhiteSpace(Configuration["Mailjet:PublicKey"]))
+                    throw new Exception("There is no mailjet public key defined.");
+                return Configuration["Mailjet:PublicKey"];
+            }
+        }
+
+        public static string MailjetPrivateKey
+        {
+            get
+            {
+                if (Configuration["Mailjet:PrivateKey"] == null || string.IsNullOrWhiteSpace(Configuration["Mailjet:PrivateKey"]))
+                    throw new Exception("There is no mailjet private key defined.");
+                return Configuration["Mailjet:PrivateKey"];
+            }
+        }
+
+         public static string MailjetReceiverEmail
+        {
+            get
+            {
+                if (Configuration["Mailjet:ReceiverEmail"] == null || string.IsNullOrWhiteSpace(Configuration["Mailjet:ReceiverEmail"]))
+                    throw new Exception("There is no mailjet receiver email defined.");
+                return Configuration["Mailjet:ReceiverEmail"];
+            }
+        }
+
+          public static string MailjetSystemEmail
+        {
+            get
+            {
+                if (Configuration["Mailjet:SystemEmail"] == null || string.IsNullOrWhiteSpace(Configuration["Mailjet:SystemEmail"]))
+                    throw new Exception("There is no mailjet system email defined.");
+                return Configuration["Mailjet:SystemEmail"];
+            }
+        }
     }
 }
 

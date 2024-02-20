@@ -33,6 +33,7 @@ namespace ElementFitness.App.Pages
         {
             try
             {
+                return RedirectToPage("../PromoVideo"); //remove if you want to enable offers page
                 Offers = _offerService.GetAll();
                 return Page();
             }

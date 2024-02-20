@@ -1,6 +1,4 @@
 
-
-
 namespace ElementFitness.Utils
 {
     public class Randomizer 

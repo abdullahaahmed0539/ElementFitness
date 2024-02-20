@@ -1,0 +1,23 @@
+@page "/Careers/{id:int}"
+@model JobDetailViewModel
+@{
+    ViewData["Title"] = "Careers";
+}
+
+
+<section id="job-detail-block mb-4">
+    <div class="container">
+        <div class="row mt-4 mb-4 job-div p-4">
+            <div class="col-12">
+                <h3 class="bebas-light">@Model.Job.JobTitle</h3>
+                <a asp-page="/Careers/Application" asp-route-ID="@Model.Job.JobID" class="btn btn-primary bebas-light mt-2">Apply Now</a>
+                <hr style="color: white;"/>
+                <h4 class="bebas-light">Requirements</h4>
+                <p class="normal-text">@Model.Job.Requirements</p>
+                <br>
+                <h4 class="bebas-light">Description</h4>
+                <p class="normal-text">@Model.Job.Description</p>
+            </div>
+        </div>
+    </div>
+</section>

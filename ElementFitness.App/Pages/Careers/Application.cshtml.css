@@ -1,0 +1,9 @@
+.modal-footer{
+    justify-content:flex-start
+}
+
+.btn-primary:disabled {
+    background-color: silver;
+    color: white;
+    border-color: silver;
+}

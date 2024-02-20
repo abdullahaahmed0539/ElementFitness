@@ -1,0 +1,36 @@
+@page
+@model CareerModel
+@{
+    ViewData["Title"] = "Careers";
+}
+
+
+<section id="job-listing-block mb-4">
+    <div class="container">
+        <div class="row mt-4">
+            @if(Model.Jobs?.Count() > 0)
+            {
+                <h1 class="bebas-light">interested in joining us? see our open roles</h1>
+            }
+            else
+            {
+                <h1 class="bebas-light text-center">interested in joining us? see our open roles</h1>
+                <p class="normal-text text-center">There are no jobs available.</p>
+            }
+        </div>
+
+        @foreach(Models.Job job in Model.Jobs)
+        {
+            <div class="row mt-4 job-div p-4">
+                <div class="col-12">
+                    <h3 class="bebas-light">@job.JobTitle</h3>
+                    <hr style="color: white;"/>
+                    <h4 class="bebas-light">Requirements</h4>
+                    <p class="normal-text">@job.Requirements</p>
+                    <a asp-page="/Careers/Details" asp-route-ID="@job.JobID" class="btn btn-primary bebas-light mt-2">Learn more</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</section>

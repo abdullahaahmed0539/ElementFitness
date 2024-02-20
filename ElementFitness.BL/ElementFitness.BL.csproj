@@ -12,4 +12,8 @@
     <ProjectReference Include="..\ElementFitness.Utils\ElementFitness.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Mailjet.Api" Version="3.0.0" />
+  </ItemGroup>
+
 </Project>
