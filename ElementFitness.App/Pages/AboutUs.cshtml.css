@@ -6,3 +6,26 @@
     background-color: #E5E5E5;
     padding: 50px;
 }
+
+/*large screens*/
+@media(min-width: 768px) {
+    .mt-6{
+        margin-top : 32rem !important;
+    }
+    .h1 {
+        font-weight: bolder;
+        font-size: 50px;
+    }
+}
+
+/*small screens*/
+@media(max-width: 767px) {
+    .mt-6 {
+        margin-top: 10.4rem !important
+    }
+
+    .h1 {
+        font-weight: bolder;
+        font-size: 16px;
+    }
+}
