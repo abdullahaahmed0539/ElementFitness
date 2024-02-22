@@ -58,14 +58,12 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
+#footer-custom {
+    margin-left: 8rem;
+}
 .footer {
-  position: absolute;
-  background-color: #ABABAB;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-
+    background-color: #ABABAB;
+    white-space: nowrap;
 }
 /* .customref {
     text-decoration: none !important;
