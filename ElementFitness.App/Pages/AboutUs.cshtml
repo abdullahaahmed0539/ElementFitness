@@ -12,6 +12,7 @@
          />
     </div>
     <p class = "card-img-overlay h1 text-white text-center pt-5 mt-6">ELEMENT FITNESS</p>
+    <p class = "card-img-overlay h2 text-white text-center pt-5 mt-7">THE ULTIMATE FITNESS DESTINATION</p>
 </section>
 
 
@@ -42,7 +43,7 @@
 </section>
 
 <section id="programs-block" class="section-spacing">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row mt-4">
             <h1 class="bebas-light col-12 mt-4 text-center text-md-start">Our programs</h1>
         </div>
@@ -63,10 +64,10 @@
                     <div class="card" >
                         <img src="@Url.Content(@program.ImageLink)" class="card-img-top" alt="@program.Name image" >
                         <div class="card-body">
-                            <h5 class="card-title bebas-light row ms-1 overflow-auto mt-3">@program.Name</h5>
+                            <h5 class="card-title bebas-light row ms-1 mt-3">@program.Name</h5>
                             @if(program.Description.Length > 150)
                             {
-                                <p class="card-text normal-text">@program.Description.Substring(0,170)...</p>
+                                <p class="card-text normal-text">@program.Description.Substring(0,250)...</p>
                             }
                             else
                             {
@@ -141,7 +142,7 @@
 <section id="contact-block" class="section-spacing row">
     <h1 class="bebas-dark" style="text-align: center;">Interested in becoming a member?</h1>
     <h3 class="bebas-grey" style="text-align: center;">Let's Go</h3>
-    <div class="text-center"><a href="/Contact" class="btn btn-primary" >Contact Us</a></div>
+    <div class="text-center"><a href="/Contact" id="AboutContactBtn" class="btn btn-primary" >Contact Us</a></div>
 </section>
 
 

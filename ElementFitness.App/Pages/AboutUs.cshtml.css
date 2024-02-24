@@ -7,14 +7,31 @@
     padding: 50px;
 }
 
+#AboutContactBtn {
+    font-size: 36px;
+    position: relative;
+    top: 3px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+}
+
+
 /*large screens*/
 @media(min-width: 768px) {
     .mt-6{
         margin-top : 32rem !important;
     }
+    .mt-7 {
+        margin-top: 38rem !important
+    }
+    .h2 {
+        font-weight: bolder;
+        font-size: 24px;
+    }
     .h1 {
         font-weight: bolder;
-        font-size: 50px;
+        font-size: 66px;
     }
 }
 
@@ -24,6 +41,13 @@
         margin-top: 10.4rem !important
     }
 
+    .mt-7 {
+        margin-top: 12.4rem !important
+    }
+    .h2 {
+        font-weight: bolder;
+        font-size: 10px;
+    }
     .h1 {
         font-weight: bolder;
         font-size: 16px;

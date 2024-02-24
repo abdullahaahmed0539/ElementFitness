@@ -36,7 +36,7 @@
                         <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@program.ProgramID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
                     </span>
                     <div class="card-body container">
-                        <h5 class="card-title  bebas-light row ms-1 overflow-auto">@program.Name</h5>
+                        <h5 class="card-title  bebas-light row ms-1">@program.Name</h5>
                         <div class="row ms-1">
                             <a asp-page="/Admin/Programs/Details" asp-route-ID="@program.ProgramID" class="btn btn-outline-light bebas-light me-1 col-4 col-md-5">View</a>
                             <a asp-page="/Admin/Programs/Details" asp-route-ID="@program.ProgramID" asp-route-enableEditing="true"  class="btn btn-outline-light bebas-light col-4 col-md-5">Update</a>
