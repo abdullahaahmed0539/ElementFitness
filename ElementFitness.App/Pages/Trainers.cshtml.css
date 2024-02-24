@@ -1,0 +1,12 @@
+﻿#AboutContactBtn {
+    font-size: 36px;
+    position: relative;
+    top: 3px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+}
+#contact-block {
+    background-color: #E5E5E5;
+    padding: 50px;
+}

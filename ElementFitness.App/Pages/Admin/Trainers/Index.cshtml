@@ -35,7 +35,7 @@
                         <span class="material-symbols-outlined delete-icon" onclick="setOnDeleteParamValue('@trainer.TrainerID')"  data-bs-toggle="modal" data-bs-target="#delete-modal">delete</span>
                     </span>
                     <div class="card-body container">
-                        <h5 class="card-title  bebas-light row ms-1 overflow-auto">@trainer.FirstName @trainer.LastName</h5>
+                        <h5 class="card-title  bebas-light row ms-1">@trainer.FirstName @trainer.LastName</h5>
                         <p class="card-subtitle normal-text ms-1">@trainer.JobTitle</p>
                         <div class="row ms-1 mt-3">
                             <a asp-page="/Admin/Trainers/Details" asp-route-ID="@trainer.TrainerID" class="btn btn-outline-light bebas-light me-1 col-4 col-md-5">View</a>

@@ -3,6 +3,39 @@
 @{
     ViewData["Title"] = "Trainers";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Trainers.</p>
+<section class="mt-2 mt-md-4 row" id="program-block">
+    <div class="container">
+        <h1 class="bebas-light" style="text-align: center;">MEET OUR EXPERT TRAINERS</h1>
+        <p class="normal-text" align="center" style="text-justify:inter-word; padding-left: 15%; padding-right: 15%">
+            Experience the guidance of our skilled and dedicated trainers, committed to your fitness success.
+            With expertise across diverse training techniques, they're here to provide personalized
+            support and motivation. Elevate your journey with our professional team by your side.
+        </p>
+        <p class="normal-text" align="center">
+
+        </p>
+
+        <div class="container-fluid">
+            <div class="row">
+                @foreach (Models.Trainer trainer in Model.Trainers)
+                {
+                    <span class="col-12 col-md-6 col-lg-4 mt-4 mb-4">
+                        <div class="card">
+                            <img src="@Url.Content(@trainer.ImageLink)" class="card-img-top" alt="@trainer.FirstName image">
+                            <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                                <h3 class="card-title bebas-light row ms-1 mt-3">@trainer.FirstName @trainer.LastName</h3>
+                            </div>
+                        </div>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact-block" class="section-spacing row">
+    <h1 class="bebas-dark" style="text-align: center;">Interested in becoming a member?</h1>
+    <h3 class="bebas-grey" style="text-align: center;">Let's Go</h3>
+    <div class="text-center"><a href="/Contact" id="AboutContactBtn" class="btn btn-primary">Contact Us</a></div>
+</section>
