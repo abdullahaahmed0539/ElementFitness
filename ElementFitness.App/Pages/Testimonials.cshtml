@@ -3,6 +3,39 @@
 @{
     ViewData["Title"] = "Testimonials";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Testimonials.</p>
+<section id="partners-block">
+    <div class="container">
+        <div class="row mt-4">
+            <h1 class="bebas-light" style="text-align: center;">Testimonials</h1>
+        </div>
+        @if(Model.Testimonials?.Count() > 0)
+        {  
+            <div class="row">
+                @foreach(Models.Testimonial testimonial in Model.Testimonials)
+                {
+                    <span class="col-12 col-md-6 col-lg-4 mt-4 mb-4">
+                        <div class="card" >
+                            <img src="@Url.Content(@testimonial.ImageLink)" class="card-img-top" alt="@testimonial.Name image" >
+                            <div class="card-body">
+                                <h5 class="card-title bebas-light row ms-1 mt-4 mb-3">@testimonial.Name</h5>
+                                <p class="card-text normal-text">@testimonial.Description</p>
+                            </div>
+                        </div>
+                    </span>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="card-text normal-text text-center">There are no partners to show.</p>
+        }
+    </div>
+</section>
+
+
+<section id="contact-block" class="section-spacing row">
+    <h1 class="bebas-dark" style="text-align: center;">Interested in becoming a member?</h1>
+    <h3 class="bebas-grey" style="text-align: center;">Let's Go</h3>
+    <div class="text-center"><a href="/Contact" id="AboutContactBtn" class="btn btn-primary" >Contact Us</a></div>
+</section>
