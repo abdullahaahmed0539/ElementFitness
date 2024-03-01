@@ -31,12 +31,12 @@ namespace ElementFitness.Models {
         [Column("Profession")]
         public string? Profession { get; set; } 
 
-        [Required]
+       // [Required]
         [Column("Contact_Type")]
         [Display(Name ="Contact Type")]
         public string? ContactType { get; set; } 
 
-        [Required]
+        //[Required]
         [Column("Created_On")]
         public DateTime? CreatedOn { get; set; } 
 

@@ -33,6 +33,12 @@
         font-weight: bolder;
         font-size: 66px;
     }
+    .ms-6{
+        margin-left:-9rem;
+    }
+    .me-6{
+        margin-right:-9rem;
+    }
 }
 
 /*small screens*/

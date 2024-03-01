@@ -31,7 +31,7 @@ namespace ElementFitness.App.Pages
                 return RedirectToPage("../../Error");
             }
         }
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace ElementFitness.App.Pages
 
                 try
                 {
-                    await _enquiryService.AddAsync(enquiryToBeAdded)!;
+                    _enquiryService.SendEnquiryEmail(enquiryToBeAdded!);
                     enquiryToBeAdded = null;
                     return RedirectToPage("./Index");
                 }

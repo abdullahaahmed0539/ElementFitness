@@ -11,33 +11,33 @@ namespace ElementFitness.Models {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EnquiryID { get; set; }
 
-        [Required]
+       // [Required]
         [Column("Suitable_Contact_Time")]
         [StringLength(25)]  
         public string? SuitableContactTime { get; set; }
 
-        [Required]
+       // [Required]
         [Column("Objectives")]  
         public string? Objectives { get; set; }
 
-        [Required]
+        //[Required]
         [Column("Message")]
         public string? Message { get; set; } 
 
      
-        [Required]
+        //[Required]
         [Column("Created_On")]
         public DateTime? CreatedOn { get; set; }
 
-        [Required]
+       // [Required]
         [Column("Read")]
         public bool? Read { get; set; } = false;    
 
-        [Required]
+       // [Required]
         [Column("Resolved")]
         public bool? Resolved { get; set; } = false;
 
-        [Required]
+       // [Required]
         [Column("ContactID")]
         public int ContactID { get; set; }
 
