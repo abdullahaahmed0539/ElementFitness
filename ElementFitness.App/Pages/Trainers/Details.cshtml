@@ -23,14 +23,14 @@
         <button class="carousel-control-prev" type="button">
             @if(Model.prevTrainerId != 0)
             {
-            <a asp-page="/Trainers/Details" asp-route-ID="@Model.prevTrainerId" class="btn card-title bebas-light row ms-1 mt-3"><span>Previous</span></a>
+            <a asp-page="/Trainers/Details" asp-route-ID="@Model.prevTrainerId" class="btn card-title bebas-light row mt-3 ms-6"><span>Previous</span></a>
             }
             
         </button>
         <button class="carousel-control-next" type="button">
             @if(Model.nextTrainerId != 0)
             {
-              <a asp-page="/Trainers/Details" asp-route-ID="@Model.nextTrainerId" class="btn card-title bebas-light row ms-1 mt-3"><span>Next</span></a>   
+              <a asp-page="/Trainers/Details" asp-route-ID="@Model.nextTrainerId" class="btn card-title bebas-light row ms-1 mt-3 "><span>Next</span></a>   
             }
         </button>
     </div>
