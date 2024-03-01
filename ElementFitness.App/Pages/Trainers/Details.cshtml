@@ -6,7 +6,7 @@
 
 <section class="row" id="trainer-detail-block">
     <div class="mt-5 mb-5 container col-12 col-lg-6 order-lg-first order-last">
-       <img src="@Url.Content(@Model.trainer.ImageLink)" class="card-img-top" alt="@Model.trainer.FirstName image">
+        <img src="@Url.Content(@Model.trainer.ImageLink)" class="card-img-top" alt="@Model.trainer.FirstName image">
     </div>
     <div class="col-12 col-lg-6 mt-4 order-lg-last order-first ">
         <h1 class="bebas-light mt-4 ms-4">@Model.trainer.FirstName @Model.trainer.LastName</h1>
@@ -20,6 +20,19 @@
                 @Model.trainer.Bio
             </p>
         </div>
+        <button class="carousel-control-prev" type="button">
+            @if(Model.prevTrainerId != 0)
+            {
+            <a asp-page="/Trainers/Details" asp-route-ID="@Model.prevTrainerId" class="btn card-title bebas-light row ms-1 mt-3"><span>Previous</span></a>
+            }
+            
+        </button>
+        <button class="carousel-control-next" type="button">
+            @if(Model.nextTrainerId != 0)
+            {
+              <a asp-page="/Trainers/Details" asp-route-ID="@Model.nextTrainerId" class="btn card-title bebas-light row ms-1 mt-3"><span>Next</span></a>   
+            }
+        </button>
     </div>
 </section>
 

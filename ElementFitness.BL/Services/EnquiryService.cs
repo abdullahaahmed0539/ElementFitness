@@ -30,7 +30,7 @@ namespace ElementFitness.BL.Services
 
             MailjetRequest request = new MailjetRequest
             {
-                Resource = Send.Resource,
+                Resource = SendV31.Resource,
             }
             .Property(Send.Messages, new JArray {
                 new JObject {
