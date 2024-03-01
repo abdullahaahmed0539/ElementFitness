@@ -24,7 +24,7 @@
                         <div class="card">
                             <img src="@Url.Content(@trainer.ImageLink)" class="card-img-top" alt="@trainer.FirstName image">
                             <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
-                                <h3 class="card-title bebas-light row ms-1 mt-3">@trainer.FirstName @trainer.LastName</h3>
+                                <a asp-page="/Trainers/Details" asp-route-ID="@trainer.TrainerID" class="btn card-title bebas-light row ms-1 mt-3">@trainer.FirstName @trainer.LastName</a>
                             </div>
                         </div>
                     </span>

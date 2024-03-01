@@ -23,6 +23,11 @@
 .map {
     -webkit-filter: grayscale(100%);
 }
-.modal-body{
-    left:30%;
+
+/*large screens*/
+@media(min-width: 768px) {
+
+    .modal-body {
+        left: 30%;
+    }
 }
