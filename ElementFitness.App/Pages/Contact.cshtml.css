@@ -24,6 +24,12 @@
     -webkit-filter: grayscale(100%);
 }
 
+.btn-primary:disabled {
+    color: #fff !important;
+    background-color: #e51440 !important;
+    border-color: #e51440 !important;
+}
+
 /*large screens*/
 @media(min-width: 768px) {
 

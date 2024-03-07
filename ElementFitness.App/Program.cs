@@ -22,6 +22,7 @@ builder.Services.AddTransient<IJobListingService, JobListingService>();
 builder.Services.AddTransient<IJobApplicantService, JobApplicantService>();
 builder.Services.AddTransient<IMemberAndLeadService, MemberAndLeadService>();
 builder.Services.AddTransient<ITestimonialService, TestimonialService>();
+builder.Services.AddTransient<ISocialService, SocialService>();
 
 builder.Services.AddTransient<IProgramRepo, ProgramRepo>();
 builder.Services.AddTransient<IOfferRepo, OfferRepo>();
@@ -32,7 +33,7 @@ builder.Services.AddTransient<IJobListingRepo, JobListingRepo>();
 builder.Services.AddTransient<IJobApplicantRepo, JobApplicantRepo>();
 builder.Services.AddTransient<IMemberAndLeadRepo, MemberAndLeadRepo>();
 builder.Services.AddTransient<ITestimonialRepo, TestimonialRepo>();
-
+builder.Services.AddTransient<ISocialRepo, SocialRepo>();
 
 
 // Add services to the container.

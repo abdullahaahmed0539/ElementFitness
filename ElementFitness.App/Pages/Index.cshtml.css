@@ -34,6 +34,12 @@
     #bmi-calculator {
         padding: 30px 10px;
     }
+    .bebas-dark {
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 50px;
+        letter-spacing: 0em;
+    }
 }
 
 /*large screens*/
@@ -54,6 +60,13 @@
 
     #bmi-calculator {
         padding: 30px 70px;
+    }
+
+    .bebas-dark {
+        font-size: 50px;
+        font-weight: 400;
+        line-height: 60px;
+        letter-spacing: 0em;
     }
 }
 
@@ -96,12 +109,6 @@
 {
     position: relative;
     top: 4px;
-}
-.bebas-dark {
-    font-size: 50px;
-    font-weight: 400;
-    line-height: 60px;
-    letter-spacing: 0em;
 }
 
 #IndexContactUsBtn {

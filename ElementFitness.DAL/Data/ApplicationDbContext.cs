@@ -22,7 +22,7 @@ namespace ElementFitness.DAL.Data {
         public DbSet<Partner>? Partners  { get; set; }
         public DbSet<Program>? Programs  { get; set; }
         public DbSet<Testimonial>? Testimonials  { get; set; }
-
+        public DbSet<Social>? Socials { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             BuildDatabase(modelBuilder);
@@ -41,7 +41,9 @@ namespace ElementFitness.DAL.Data {
             modelBuilder.Entity<Trainer>()
                 .Property(trainer => trainer.TrainerID)
                 .HasDefaultValueSql("nextval('\"auto_increment\"')");
-
+            modelBuilder.Entity<Social>()
+                .Property(social => social.SocialID)
+                .HasDefaultValueSql("nextval('\"auto_increment\"')");
             modelBuilder.Entity<Enquiry>()
                 .Property(enquiry => enquiry.EnquiryID)
                 .HasDefaultValueSql("nextval('\"auto_increment\"')");

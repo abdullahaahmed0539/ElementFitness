@@ -12,17 +12,23 @@ namespace ElementFitness.App.Pages
     public class ContactModel : PageModel
     {
         private readonly IEnquiryService _enquiryService;
+        private readonly ISocialService _socialService;
+        public string facebookLink { get; private set; }
+        public string instagramLink { get; private set; }
         [BindProperty]
         public Enquiry? enquiryToBeAdded { get; set; }
-        public ContactModel(IEnquiryService enquiryService)
+        public ContactModel(IEnquiryService enquiryService, ISocialService socialService)
         {
             _enquiryService = enquiryService;
+            _socialService = socialService;
         }
 
         public IActionResult OnGet()
         {
             try
             {
+                facebookLink = _socialService.GetAll().FirstOrDefault(x => x.SocialPlatform == "Facebook").SocialLink;
+                instagramLink = _socialService.GetAll().FirstOrDefault(x => x.SocialPlatform == "Instagram").SocialLink;
                 return Page();
             }
             catch (Exception ex)

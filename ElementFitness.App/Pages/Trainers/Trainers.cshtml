@@ -23,7 +23,7 @@
                     <span class="col-12 col-md-6 col-lg-4 mt-4 mb-4">
                         <div class="card">
                             <img src="@Url.Content(@trainer.ImageLink)" class="card-img-top" alt="@trainer.FirstName image">
-                            <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
+                            <div class="label text-center">
                                 <a asp-page="/Trainers/Details" asp-route-ID="@trainer.TrainerID" class="card-title bebas-light row ms-1 mt-3 text-decoration-none"><span class="text-center">@trainer.FirstName @trainer.LastName</span></a>
                             </div>
                         </div>

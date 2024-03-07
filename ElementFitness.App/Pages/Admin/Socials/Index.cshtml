@@ -1,0 +1,75 @@
+﻿@page
+@model ElementFitness.App.Pages.Admin.Socials.IndexModel
+@{
+    ViewData["Title"] = "Admin Portal - Socials";
+    Layout = "_AdminLayout";
+}
+
+
+<div class="row ms-1">
+    <div class="mt-3 col-6 col-md-9 col-lg-10">
+        <h1 class="bebas-light">Socials</h1>
+    </div>    
+</div>
+
+<div class="d-none">
+   <input id="error-message" value="@ViewData["ErrorMessage"]"/>
+</div>
+
+
+<div class="row ms-1">
+    <div class="col-12">
+        <h3 class="bebas-light mt-3">Change Facebook Social Link</h3>
+    </div>
+</div>
+
+
+<form method="post" asp-page-handler="FacebookLinkUpdate" enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="form-group row">
+            <div class="col-12 col-md-6">
+                <label asp-for="facebookLink" for="FacebookLinkInput" class="bebas-light mt-1">Facebook Link</label>
+                <input asp-for="facebookLink" type="text" class="form-control" id="FacebookLinkInput" value="@Model.facebookLink">
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer row d-flex justify-content-start">
+        <div>
+            <button type="submit" id="change-btn" class="btn btn-primary" hidden>Update Link</button>   
+            <button type="submit" id="disabled-change-btn" class="btn btn-primary" disabled>Update Link</button>      
+        </div>    
+    </div>
+</form>
+
+
+
+<div class="row ms-1">
+    <div class="col-12">
+        <h3 class="bebas-light mt-3">Change Instagram Social Link</h3>
+    </div>
+</div>
+
+
+<form method="post" asp-page-handler="InstaLinkUpdate" enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="form-group row">
+            <div class="col-12 col-md-6">
+                <label asp-for="instagramLink" for="InstaLinkInput" class="bebas-light mt-1">Instagram Link</label>
+                <input asp-for="instagramLink" type="text" class="form-control" id="InstaLinkInput" value="@Model.instagramLink">
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer row d-flex justify-content-start">
+        <div>
+            <button type="submit" id="change-btn-insta" class="btn btn-primary" hidden>Update Link</button>   
+            <button type="submit" id="disabled-change-btn-insta" class="btn btn-primary" disabled>Update Link</button>      
+        </div>    
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="~/js/socials.js" asp-append-version="true"></script> 
+}
