@@ -18,6 +18,9 @@ a {
   /* background-color: #1b6ec2;
   border-color: #1861ac; */
 }
+.container{
+    z-index:10;
+}
 .pb-3 {
     padding-bottom: 0rem !important;
 }
@@ -64,6 +67,7 @@ html, body {
 .footer {
     background-color: #ABABAB;
     white-space: nowrap;
+
 }
 /* .customref {
     text-decoration: none !important;
