@@ -137,3 +137,59 @@ html {
 .card-body{
   padding-left: 0px;
 }
+.row {
+    --bs-gutter-x: 0rem !important;
+}
+.half-a-border-on-top {
+    border-top: 2px solid;
+    border-image: linear-gradient(to right, #FFF 50%, white 50%) 100% 1 !important;
+}
+
+#trainer-detail-block img.card-img-top {
+    padding-right: 27px !important;
+    width: 100%;
+    max-width: 60%;
+}
+.order-last {
+    text-align: center;
+}
+#trainer-detail-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    #trainer-detail-block .ms-4 {
+        margin-left: 0rem !important;
+    }
+
+.row.ms-2.me-2.mb-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+img.d-none {
+    width: 100%;
+    max-width: 32% !important;
+}
+/*.btn.btn-primary {
+    font-size: 36px;
+    position: relative;
+    top: 3px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+}*/
+    @media (max-width: 767px) {
+        .card img {
+            height: auto !important;
+        }
+
+        .btn.btn-primary {
+            font-size: 20px !important;
+            position: relative;
+            top: 6px;
+            font-weight: 400;
+            line-height: 26px !important;
+            letter-spacing: 0em;
+        }
+    }
