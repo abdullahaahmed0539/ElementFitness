@@ -22,3 +22,16 @@ img {
     bottom: 0px;
     opacity: 0.85;
 }
+/*large screens*/
+@media(min-width: 768px) {
+    .card img {
+        height: 750px;
+    }
+}
+
+/*small screens*/
+@media(max-width: 767px) {
+    .card img {
+        height: 300px;
+    }
+}

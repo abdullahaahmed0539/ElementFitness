@@ -16,7 +16,6 @@
     letter-spacing: 0em;
 }
 
-
 /*large screens*/
 @media(min-width: 768px) {
     .mt-6{
@@ -39,6 +38,10 @@
     .me-6{
         margin-right:-9rem;
     }
+
+    .carousel-item img {
+        height: 900px;
+    }
 }
 
 /*small screens*/
@@ -57,5 +60,8 @@
     .h1 {
         font-weight: bolder;
         font-size: 16px;
+    }
+    .carousel-item img {
+        height: 250px;
     }
 }

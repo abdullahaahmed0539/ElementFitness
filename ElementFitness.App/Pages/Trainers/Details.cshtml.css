@@ -17,9 +17,7 @@ img {
 
 /*large screens*/
 @media(min-width: 768px) {
-
     .carousel-control-prev {
         left: 55rem !important;
     }
-
 }
