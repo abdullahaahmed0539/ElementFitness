@@ -22,10 +22,12 @@ html {
   font-family: "Bebas Neue", sans-serif;
   color: rgb(111, 111, 111);
 }
-
-.normal-text{
-  font-size: 16px;
-  color: white;
+.custom-btn-css{
+    font-size:18px;
+}
+.normal-text {
+    font-size: 16px;
+    color: white;
 }
 
 .normal-dark{
