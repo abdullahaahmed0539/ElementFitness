@@ -20,4 +20,7 @@ img {
     .carousel-control-prev {
         left: 55rem !important;
     }
+    #trainer-description-block {
+        height: 750px;
+    }
 }

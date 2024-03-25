@@ -21,9 +21,9 @@ $(document).ready(() => {
         $("#testimonials-link").addClass("half-a-border-on-top");
     else if (page.startsWith("Careers")) {
         $("#careers-link").addClass("half-a-border-on-top");
-        document.querySelector('.footer').style.position = "absolute";
-        document.querySelector('.footer').style.width = "100%";
-        document.querySelector('.footer').style.bottom = "0";
+        //document.querySelector('.footer').style.position = "absolute";
+        //document.querySelector('.footer').style.width = "100%";
+        //document.querySelector('.footer').style.bottom = "0";
     }
     else if (page.startsWith("Contact"))
     $("#contact-link").addClass("half-a-border-on-top");

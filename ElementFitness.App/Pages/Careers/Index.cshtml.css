@@ -1,3 +1,7 @@
 .job-div {
   background-color: #2d2d2d;
 }
+
+#job-listing-block{
+    min-height:80vh;
+}
